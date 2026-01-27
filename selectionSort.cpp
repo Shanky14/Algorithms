@@ -34,7 +34,7 @@ int main()
   auto start = high_resolution_clock::now();
   selectionS(a);
   auto end = high_resolution_clock::now();
-  auto duration = duration_cast<nanoseconds>(end - start);
+  auto duration = duration_cast<milliseconds>(end - start);
   cout << "Time taken for sorting : " << duration.count() << " ns\n";
     return 0;
 }
