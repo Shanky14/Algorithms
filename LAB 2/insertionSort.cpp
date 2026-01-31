@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<chrono>
+#include<fstream>
 using namespace std;
 using namespace std::chrono;
 void insertionS(vector<int> &a,int n)
@@ -33,7 +34,12 @@ int main()
   auto start = high_resolution_clock::now();
   insertionS(a,a.size());
   auto end = high_resolution_clock::now();
-  auto duration = duration_cast<nanoseconds>(end - start);
-  cout << "Time taken for sorting : " << duration.count() << " ns\n";
+  auto duration = duration_cast<milliseconds>(end - start);
+  ofstream file("insertionS.txt", ios::app);
+    file << "array size" << " " << "duration"<< endl;
+    file << n << " " << duration.count() << endl;
+    
+    file.close();
+    cout << "Output successfully written to output.txt" << endl;
     return 0;
 }
