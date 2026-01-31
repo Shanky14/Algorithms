@@ -17,16 +17,22 @@ int linearS(vector<int> &a, int &target, int j)
 }
 int main()
 {
-  srand(time(0));
   vector<int> a;
   int n;
   cout << "no of elements:\n";
   cin >> n;
+ 
   for (int i = 0; i < n; i++)
   {
-    a.push_back(rand());
+    a.push_back(i+1);
   }
-  int target = rand() % 100;
+  srand(time(0));
+  for(int i=a.size()-1;i>0;i--)
+  {
+    int k=rand()%(i+1);
+    swap(a[i],a[k]);
+  }
+  int target = a[n-1];
   cout << "key : " << target << endl;
   auto start = high_resolution_clock::now();
   int index = linearS(a, target, 0);

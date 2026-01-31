@@ -3,24 +3,23 @@
 #include<chrono>
 using namespace std;
 using namespace std::chrono;
-
-void selectionS(vector<int> &a)
+void insertionS(vector<int> &a,int n)
 {
-    for (int i = 0; i < a.size(); i++)
+    for(int j=2;j<n;j++)
     {
-        int j=i;
-        for (int k = i+1; k < a.size(); k++)
+        int key=a[j];
+        int i=j-1;
+        while (i>0 && a[i]>key)
         {
-            if(a[k]<a[j])
-            j=k;
+            a[i+1]=a[i];
+            i=i-1;
         }
-        swap(a[j],a[i]);
+        a[i+1]=key;
     }
-    
 }
 int main()
 {
-      srand(time(0));
+       srand(time(0));
   vector<int> a;
   int n;
   cout << "no of elements:\n";
@@ -29,8 +28,10 @@ int main()
   {
     a.push_back(rand());
   }
+ /* int target = rand() % 1;
+  cout << "key : " << target << endl;*/
   auto start = high_resolution_clock::now();
-  selectionS(a);
+  insertionS(a,a.size());
   auto end = high_resolution_clock::now();
   auto duration = duration_cast<nanoseconds>(end - start);
   cout << "Time taken for sorting : " << duration.count() << " ns\n";
