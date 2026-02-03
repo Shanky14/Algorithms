@@ -177,6 +177,10 @@ It works by repeatedly selecting the smallest element from the unsorted portion 
 In each pass, the algorithm finds the minimum element from the remaining unsorted elements and swaps it with the element at the current position.
 This process continues until the entire array is sorted.
 
+## GRAPH 
+
+![Graph for selection sort](LAB%201/selectionS.png)
+
 ## Time Complexity
 
 Best Case: O(n²)
@@ -349,3 +353,90 @@ The function is called, and the missing number (3 in this case) is printed.
 ## Conclusion
 The XOR method provides an efficient way to find the missing number using linear time and constant space.
 It avoids sorting or extra arrays and demonstrates the power of bitwise operations in problem-solving.
+
+## Practical-11: Binary Search (Recursive)
+## Aim
+
+To implement recursive binary search on a sorted array and measure its execution time.
+
+## Theory
+
+Binary Search is an efficient searching algorithm that works on a sorted array.
+It repeatedly divides the search space into two halves and compares the target element with the middle element.
+If the target equals the middle element, the search is successful.
+If the target is smaller, the search continues in the left half.
+If the target is larger, the search continues in the right half.
+This divide-and-conquer approach significantly reduces the number of comparisons.
+
+## GRAPH
+
+![Graph for binary search](LAB%202/BinaryS.png)
+
+## Time Complexity
+
+Best Case: O(1)
+Average Case: O(log n)
+Worst Case: O(log n)
+
+## Space Complexity
+
+O(log n) (due to recursive call stack)
+
+## What the Code Does
+
+The program generates random numbers and stores them in a vector.
+The array is shuffled and then sorted, which is required for binary search.
+The largest element is chosen as the target.
+The function binaryS() is called recursively:
+If start > end, it returns -1 (element not found).
+It calculates the middle index.
+If the middle element matches the target, it returns the index.
+Otherwise, it searches in the appropriate half.
+The execution time is measured using the chrono library.
+The array size and execution time are stored in binaryS.txt.
+
+## Conclusion
+
+Recursive Binary Search efficiently finds an element in a sorted array using fewer comparisons.
+Its logarithmic time complexity makes it suitable for large datasets.
+
+## Practical-12: Insertion Sort
+## Aim
+
+To implement the Insertion Sort algorithm and analyze its execution time.
+
+## Theory
+
+Insertion Sort is a simple sorting algorithm that works by inserting elements into their correct position in a sorted part of the array.
+The array is divided into sorted and unsorted parts.
+Elements from the unsorted part are picked one by one and placed at the correct position in the sorted part.
+It is similar to sorting playing cards in hand.
+Insertion Sort is easy to understand but inefficient for large inputs.
+
+## GRAPH 
+
+![Graph for Insertion Sort](LAB%202/insertionS.png)
+## Time Complexity
+
+Best Case: O(n) (already sorted array)
+Average Case: O(n²)
+Worst Case: O(n²) (reverse sorted array)
+
+## Space Complexity
+
+O(1) (in-place sorting)
+
+## What the Code Does
+
+The program generates random elements and stores them in a vector.
+The function insertionS() sorts the array:
+It selects a key element.
+Shifts all larger elements one position to the right.
+Inserts the key at its correct position.
+The execution time is measured using the chrono library.
+The array size and execution time are written into insertionS.txt.
+
+## Conclusion
+
+Insertion Sort correctly sorts the array using a simple approach.
+Although it is inefficient for large datasets, it is useful for small inputs and nearly sorted arrays.
