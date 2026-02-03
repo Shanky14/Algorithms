@@ -11,6 +11,9 @@ If the elements are in the wrong order, they are swapped.
 After each complete pass, the largest unsorted element “bubbles up” to its correct position at the end of the array.
 This process continues until the entire array is sorted.
 
+## GRAPH
+![Graph for bubble sort](LAB%202/BinaryS.png)
+
 ## Time Complexity
 
 Best Case: O(n) (when the array is already sorted, with optimization)
