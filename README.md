@@ -12,7 +12,7 @@ After each complete pass, the largest unsorted element “bubbles up” to its c
 This process continues until the entire array is sorted.
 
 ## GRAPH
-![Graph for bubble sort](LAB%202/BinaryS.png)
+![Graph for bubble sort](LAB%201/bubbleS.png)
 
 ## Time Complexity
 

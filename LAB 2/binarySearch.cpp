@@ -2,18 +2,19 @@
 #include<vector>
 #include<chrono>
 #include <algorithm>
+#include<fstream>
 using namespace std;
 using namespace std::chrono;
 int binaryS(vector<int> &a,int st,int end,int target)
 {
- int mid=st+(end-st)/2;
- while(st<end){
+  if(st>end) return -1;
+   int mid=st+(end-st)/2;
     if(a[mid]==target) return mid;
     else if(a[mid]<target) return binaryS(a,mid+1,end,target);
     else if(a[mid]>target)return binaryS(a,st,mid-1,target);
     else return -1;
  }
-}
+
 int main()
 {
 srand(time(0));
@@ -25,13 +26,23 @@ srand(time(0));
   {
     a.push_back(rand());
   }
+  for (int i = a.size()-1; i >=0; i--)
+  {
+    int j = rand()%(i+1);
+    swap(a[i],a[j]);
+  }
+  
   sort(a.begin(),a.end());
   int target = a[n-1];
   auto start = high_resolution_clock::now();
   int index = binaryS(a,0,a.size()-1,target);
   auto end = high_resolution_clock::now();
   auto duration = duration_cast<nanoseconds>(end - start);
-  cout<<"Index found at :"<<index<<endl;
-  cout << "Time taken for searching : " << duration.count() << " ns\n";
+  ofstream file("binaryS.txt", ios::app);
+    file << "array size" << " " << "duration"<< endl;
+    file << n << " " << duration.count() << endl;
+    
+    file.close();
+    cout << "Output successfully written to binaryS.txt" << endl;
     return 0;
 }
