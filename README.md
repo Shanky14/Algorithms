@@ -354,6 +354,66 @@ The function is called, and the missing number (3 in this case) is printed.
 The XOR method provides an efficient way to find the missing number using linear time and constant space.
 It avoids sorting or extra arrays and demonstrates the power of bitwise operations in problem-solving.
 
+## Practical-10 Duplicate number
+
+## Aim 
+
+To implement a C++ program that identifies a duplicate element in an array using a comparison-based approach.
+
+## Theory
+
+A duplicate element is a value that appears more than once in an array.
+In this algorithm, the array is processed by comparing selected elements with other elements in the array to detect repetition.
+
+The algorithm uses a simple nested loop technique:
+
+The array size is divided to determine a comparison range.
+
+A temporary element is selected.
+
+This element is compared with other elements in the array.
+
+If a match is found, that element is considered a duplicate.
+
+This approach is easy to understand but not efficient for large datasets.
+
+## Time Complexity
+
+Best Case: O(n) (duplicate found early)
+Average Case: O(n²)
+Worst Case: O(n²) (duplicate found at the end)
+
+## Space Complexity
+
+O(1) (no extra memory used)
+
+## What the Code Does
+
+The program initializes an integer array containing duplicate values.
+The function duplicate():
+
+Divides the array size for comparison.
+
+Selects a temporary element.
+
+Compares it with other elements in the array.
+
+Returns the duplicate element if found.
+
+The main function:
+
+Calculates the array size.
+
+Calls the duplicate() function.
+
+Prints the duplicate element.
+
+Conclusion
+
+The program successfully detects a duplicate element in the given array.
+Although the logic is simple and easy to understand, the algorithm is inefficient for large inputs due to its quadratic time complexity.
+This method is suitable only for small datasets or academic understanding.
+
 ## Practical-11: Binary Search (Recursive)
 ## Aim
 
