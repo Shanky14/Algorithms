@@ -1,54 +1,46 @@
 #include <iostream>
 #include <vector>
-#include <chrono>
 #include <fstream>
-#include <algorithm>
+#include <chrono>
+#include<algorithm>
 using namespace std;
 using namespace std::chrono;
-int partitionFunc(vector<int> &arr, int s, int e)
+void merge(vector<int> &arr, int st, int mid, int end)
 {
-    int m = s + (e - s) / 2;
-    int index = s;
+    vector<int> temp;
+    int i = st, j = mid + 1;
 
-    for (int i = s; i <= e; i++)
+    while (i <= mid && j <= end)
     {
-        if (arr[i] < arr[m])
-            index++;
+        if (arr[i] <= arr[j])
+            temp.push_back(arr[i++]);
+        else
+            temp.push_back(arr[j++]);
     }
 
-    swap(arr[m], arr[index]);
+    while (i <= mid)
+        temp.push_back(arr[i++]);
+    while (j <= end)
+        temp.push_back(arr[j++]);
 
-    int l = s;
-    int h = e;
-
-    while (l < index && h > index)
-    {
-        while (arr[l] < arr[index])
-            l++;
-        while (arr[h] > arr[index])
-            h--;
-        if (l < h)
-        {
-            swap(arr[l], arr[h]);
-            l++;
-            h--;
-        }
-    }
-    return index;
+    for (int idx = 0; idx < temp.size(); idx++)
+        arr[st + idx] = temp[idx];
 }
 
-void quickSort(vector<int> &arr, int s, int e)
+void mergeSort(vector<int> &arr, int st, int end)
 {
-    if (s < e)
-    {
-        int j = partitionFunc(arr, s, e);
-        quickSort(arr, s, j - 1);
-        quickSort(arr, j + 1, e);
-    }
+    if (st >= end)
+        return;
+
+    int mid = st + (end - st) / 2;
+    mergeSort(arr, st, mid);
+    mergeSort(arr, mid + 1, end);
+    merge(arr, st, mid, end);
 }
 
 int main()
 {
+    srand(time(0));
     vector<int> sizes = {100, 500, 1000, 5000, 10000, 15000, 20000, 25000, 30000,35000,40000,45000};
 
     for (int n : sizes)
@@ -66,9 +58,8 @@ int main()
                 int j = rand() % (i + 1);
                 swap(arr[i], arr[j]);
             }
-
             auto start = high_resolution_clock::now();
-            quickSort(arr, 0, arr.size() - 1);
+            mergeSort(arr, 0, arr.size() - 1);
             auto end = high_resolution_clock::now();
 
             auto duration = duration_cast<milliseconds>(end - start);
