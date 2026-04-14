@@ -500,3 +500,688 @@ The array size and execution time are written into insertionS.txt.
 
 Insertion Sort correctly sorts the array using a simple approach.
 Although it is inefficient for large datasets, it is useful for small inputs and nearly sorted arrays.
+
+## Practical-13: Merge Sort
+
+### Aim
+To implement the Merge Sort algorithm and analyze its execution time.
+
+### Theory
+Merge Sort is a **divide-and-conquer** sorting algorithm.  
+It works by recursively dividing the array into smaller subarrays, sorting them, and then merging them back together.
+
+The process involves:
+- Dividing the array into two halves
+- Recursively sorting each half
+- Merging the sorted halves into a single sorted array
+
+Unlike simple sorting algorithms, Merge Sort is efficient for large datasets due to its logarithmic division strategy.
+
+
+### Graph
+![Graph for Merge Sort](lab3/mergeSort.png)
+
+
+### Time Complexity
+
+| Case        | Complexity   |
+|------------|-------------|
+| Best Case   | O(n log n)  |
+| Average Case| O(n log n)  |
+| Worst Case  | O(n log n)  |
+
+
+### Space Complexity
+- O(n) (requires additional space for merging)
+
+
+### What the Code Does
+
+- The program generates arrays of different sizes.
+- Each array is filled with sequential values and then shuffled randomly.
+- The `mergeSort()` function:
+  - Recursively divides the array into halves
+  - Calls `merge()` to combine sorted subarrays
+- The `merge()` function:
+  - Compares elements from two halves
+  - Merges them into a temporary vector in sorted order
+- The sorting process is repeated **1000 times** for each input size to calculate average execution time.
+- Execution time is measured using the `chrono` library.
+- The program outputs the **average time (in milliseconds)** for each input size.
+
+---
+
+### Conclusion
+Merge Sort efficiently sorts large datasets with a guaranteed time complexity of **O(n log n)**.  
+Although it requires extra memory, it is significantly faster and more stable compared to algorithms like Insertion Sort for large inputs.
+
+## Practical-14: Quick Sort
+
+### Aim
+To implement the Quick Sort algorithm and analyze its execution time.
+
+---
+
+### Theory
+Quick Sort is a **divide-and-conquer** sorting algorithm.  
+It works by selecting a **pivot element** and partitioning the array such that:
+- Elements smaller than the pivot are placed on the left
+- Elements greater than the pivot are placed on the right
+
+The process is then recursively applied to the left and right subarrays.
+
+In this implementation, the pivot is chosen as the **middle element**, and elements are rearranged around it using a custom partitioning approach.
+
+---
+
+### Graph
+![Graph for Quick Sort](lab3/QuickSort.png)
+
+---
+
+### Time Complexity
+
+ Case          Complexity   
+ Best Case :    O(n log n)  
+ Average Case : O(n log n)  
+ Worst Case  :  O(n²)       
+
+---
+
+### Space Complexity
+- O(log n) (due to recursion stack)
+
+---
+
+### What the Code Does
+
+- The program generates arrays of different sizes.
+- Each array is filled with sequential values and then shuffled randomly.
+- The `quickSort()` function:
+  - Selects a pivot using the `partitionFunc()`
+  - Recursively sorts elements before and after the pivot
+- The `partitionFunc()`:
+  - Chooses the middle element as pivot
+  - Places the pivot at its correct position
+  - Rearranges elements such that smaller elements are on the left and larger on the right
+- The sorting process is repeated **1000 times** for each input size to compute average execution time.
+- Execution time is measured using the `chrono` library.
+- The program outputs the **average time (in milliseconds)** for each input size.
+
+---
+
+### Conclusion
+Quick Sort is one of the fastest sorting algorithms in practice due to its efficient partitioning strategy.  
+However, its worst-case complexity is **O(n²)**, which can occur when poor pivot choices are made.  
+Despite this, it performs exceptionally well on average and is widely used in real-world applications.
+
+## Practical-15: Binary Search
+
+### Aim
+To implement the Binary Search algorithm and analyze its execution time.
+
+---
+
+### Theory
+Binary Search is an efficient searching algorithm that works on **sorted arrays**.  
+It repeatedly divides the search space into smaller parts by comparing the target element with the middle element.
+
+Steps involved:
+- Find the middle element of the array
+- If the target matches the middle element, return the index
+- If the target is smaller, search in the left half
+- If the target is larger, search in the right half
+
+This process continues until the element is found or the search space becomes empty.
+
+---
+
+### Time Complexity
+
+ Case          Complexity 
+ Best Case  :   O(1)      
+ Average Case : O(log n)  
+ Worst Case  :  O(log n)  
+
+---
+
+### Space Complexity
+- O(log n) (due to recursion stack)
+
+---
+
+### What the Code Does
+
+- The program generates arrays of different sizes.
+- Each array is initially filled with sequential values.
+- The array is then shuffled randomly.
+- A target element is selected from the array.
+- The `binaryS()` function:
+  - Recursively searches for the target element
+  - Divides the array into smaller parts based on comparison
+- The searching process is repeated **1000 times** for each input size to calculate average execution time.
+- Execution time is measured using the `chrono` library.
+- The program outputs the **average time (in milliseconds)** for each input size.
+
+---
+
+### Conclusion
+Binary Search is a highly efficient searching algorithm with **O(log n)** time complexity.  
+It significantly reduces the number of comparisons compared to linear search.  
+However, it requires the data to be **sorted**, which is a key limitation.
+
+## Practical-16: Iterative Quick Sort (Using Stack)
+
+### Aim
+To implement the Quick Sort algorithm using an iterative approach (without recursion) and analyze its execution time.
+
+---
+
+### Theory
+Iterative Quick Sort is a variation of the Quick Sort algorithm that eliminates recursion by using an explicit **stack** data structure.
+
+Instead of recursive function calls:
+- A stack is used to store subarray indices
+- The algorithm processes subarrays iteratively
+
+Steps involved:
+- Push the initial range (start and end indices) onto the stack
+- Pop a range and partition it around a pivot
+- Push left and right subarrays (if valid) back onto the stack
+- Repeat until the stack becomes empty
+
+This approach avoids recursion overhead and helps prevent stack overflow for large inputs.
+
+---
+
+### Graph
+![Graph for Iterative Quick Sort](lab4/QuickS.png)
+
+---
+
+### Time Complexity
+
+ Case          Complexity   
+ Best Case   :  O(n log n)  
+ Average Case : O(n log n)  
+ Worst Case  :  O(n²)       
+
+---
+
+### Space Complexity
+- O(log n) (stack space in average case)
+- O(n) (worst case when stack grows large)
+
+---
+
+### What the Code Does
+
+- The program generates arrays of different sizes.
+- Each array is filled with sequential values and then shuffled randomly.
+- The `quickSort()` function:
+  - Uses a stack to simulate recursion
+  - Stores subarray indices (low and high)
+  - Iteratively processes subarrays
+- The `partition()` function:
+  - Selects the first element as pivot
+  - Rearranges elements such that smaller elements are on the left and larger on the right
+- The sorting process is repeated **1000 times** for each input size to compute average execution time.
+- Execution time is measured using the `chrono` library.
+- The program outputs the **average time (in milliseconds)** for each input size.
+
+---
+
+### Conclusion
+Iterative Quick Sort successfully eliminates recursion by using a stack-based approach.  
+It provides similar performance to recursive Quick Sort while avoiding recursion-related overhead and potential stack overflow issues.  
+However, its worst-case time complexity remains **O(n²)** when poor pivot choices are made.
+
+## Practical-17: Fractional Knapsack (Greedy Method)
+
+### Aim
+To implement the Fractional Knapsack algorithm using a greedy approach and analyze its execution time.
+
+---
+
+### Theory
+The Fractional Knapsack problem is an optimization problem where the goal is to maximize total value within a given capacity.
+
+Unlike the 0/1 Knapsack:
+- Items **can be broken into fractions**
+- You can take a portion of an item instead of the whole
+
+Greedy strategy:
+- Compute **value-to-weight ratio (value/weight)** for each item
+- Sort items in **descending order of ratio**
+- Pick items greedily:
+  - Take full item if capacity allows
+  - Otherwise, take fractional part
+
+
+---
+
+### Time Complexity
+
+ Case         Complexity  
+ Best Case  :  O(n log n)  
+ Average Case : O(n log n)  
+ Worst Case  :  O(n log n)  
+
+---
+
+### Space Complexity
+- O(n) (for storing items)
+
+---
+
+### What the Code Does
+
+- The program generates random items:
+  - Each item has a **value** and a **weight**
+- The `generateItems()` function:
+  - Creates `n` items with random values and weights
+- The `bubbleS()` function:
+  - Sorts items based on **value-to-weight ratio** in descending order
+- The `knapSack()` function:
+  - Iterates through sorted items
+  - Adds full item if capacity allows
+  - Otherwise adds fractional value of remaining capacity
+- The process is repeated **50 times** for each input size to calculate average execution time
+- Execution time is measured using the `chrono` library
+- The program outputs the **average time (in milliseconds)** for each input size
+
+---
+
+### Conclusion
+The Fractional Knapsack algorithm efficiently maximizes value using a greedy approach.  
+It performs well due to sorting based on value-to-weight ratio and allows partial selection of items.  
+This makes it significantly more efficient than the 0/1 Knapsack for large datasets.
+
+## Practical-18: Kth Smallest Element (Quickselect Algorithm)
+
+### Aim
+To find the Kth smallest element in an array using the Quickselect algorithm and analyze its execution time.
+
+---
+
+### Theory
+Quickselect is an efficient selection algorithm based on the **Quick Sort partitioning technique**.  
+It is used to find the Kth smallest (or largest) element in an unsorted array without fully sorting it.
+
+Steps involved:
+- Choose a pivot element
+- Partition the array such that:
+  - Elements smaller than pivot are on the left
+  - Elements larger than pivot are on the right
+- Check the position of the pivot:
+  - If it is the Kth position → return it
+  - If it is smaller → search in the right subarray
+  - If it is larger → search in the left subarray
+
+This reduces unnecessary computations compared to full sorting.
+
+---
+
+### Graph
+![Graph for Kth Smallest Element](lab5/ksmallest.png)
+
+---
+
+### Time Complexity
+
+ Case          Complexity   
+ Best Case   :   O(n)        
+ Average Case : O(n)        
+ Worst Case  :  O(n²)       
+
+---
+
+### Space Complexity
+- O(1) (in-place algorithm)
+
+---
+
+### What the Code Does
+
+- The program generates arrays of different sizes.
+- The `generateArray()` function:
+  - Creates a unique array of elements from `1` to `n`
+  - Randomly shuffles the array
+- The user inputs the value of **K**.
+- The `ksmallest()` function:
+  - Uses an iterative Quickselect approach
+  - Partitions the array and narrows down the search space
+- The `partition()` function:
+  - Selects the first element as pivot
+  - Rearranges elements around the pivot
+- The process is repeated **100 times** for each input size to compute average execution time.
+- Execution time is measured using the `chrono` library in **microseconds**.
+- The program outputs the **average time** for each input size.
+
+---
+
+### Conclusion
+Quickselect efficiently finds the Kth smallest element without sorting the entire array.  
+It has an average time complexity of **O(n)**, making it faster than sorting-based approaches for selection problems.  
+However, its worst-case complexity is **O(n²)** when poor pivot choices are made.
+
+## Practical-19: Find Maximum and Minimum 
+
+### Aim
+To find the maximum and minimum elements in an array using the Divide and Conquer approach and analyze its execution time.
+
+---
+
+### Theory
+The Divide and Conquer approach breaks the problem into smaller subproblems, solves them independently, and combines their results.
+
+Steps involved:
+- Divide the array into two halves
+- Recursively find maximum and minimum in each half
+- Compare results from both halves to get final maximum and minimum
+
+Cases handled:
+- If only one element → both max and min are the same
+- If two elements → compare directly
+- Otherwise → divide and solve recursively
+
+This approach reduces the number of comparisons compared to a simple linear scan.
+
+---
+
+### Graph
+![Graph for Max-Min](lab5/maxMin.png)
+
+---
+
+### Time Complexity
+
+ Case          Complexity 
+ Best Case  :  O(n)      
+ Average Case : O(n)      
+ Worst Case  :  O(n)      
+
+---
+
+### Space Complexity
+- O(log n) (due to recursion stack)
+
+---
+
+### What the Code Does
+
+- The program generates arrays of different sizes.
+- The `generateArray()` function:
+  - Creates a unique array of elements from `1` to `n`
+  - Randomly shuffles the array
+- The `maxMin()` function:
+  - Uses divide and conquer to find maximum and minimum values
+  - Splits the array recursively into smaller parts
+  - Combines results from subarrays
+- The process is repeated **100 times** for each input size to compute average execution time.
+- Execution time is measured using the `chrono` library.
+- The program outputs the **average time (in milliseconds)** for each input size.
+
+---
+
+### Conclusion
+The Divide and Conquer approach efficiently finds both maximum and minimum elements with fewer comparisons than a naive approach.  
+It maintains a linear time complexity of **O(n)** and performs well for large datasets.
+
+## Practical-20: Dijkstra’s Algorithm 
+
+### Aim
+To implement Dijkstra’s algorithm to find the shortest path from a source vertex to all other vertices in a graph and analyze its execution time.
+
+---
+
+### Theory
+Dijkstra’s Algorithm is a **greedy algorithm** used to find the shortest path in a graph with **non-negative edge weights**.
+
+Steps involved:
+- Initialize distances from the source to all vertices as infinity
+- Set distance of source vertex to 0
+- Select the unvisited vertex with the smallest distance
+- Update distances of its neighboring vertices
+- Mark the vertex as visited
+- Repeat until all vertices are processed
+
+This implementation uses an **adjacency matrix** and a simple linear search to find the minimum distance vertex.
+
+---
+
+### Graph
+![Graph for Dijkstra’s Algorithm](lab6/dijkastra.png)
+
+---
+
+### Time Complexity
+
+ Case          Complexity 
+ Best Case   :  O(n²)     
+ Average Case : O(n²)     
+ Worst Case  :  O(n²)     
+
+---
+
+### Space Complexity
+- O(n²) (adjacency matrix)
+- O(n) (distance and visited arrays)
+
+---
+
+### What the Code Does
+
+- The program generates graphs of different sizes using an adjacency matrix.
+- The `generateMatrix()` function:
+  - Creates a random weighted graph
+  - Assigns random weights or `INF` (no edge) between vertices
+- The `dijkastra()` function:
+  - Initializes distance and visited arrays
+  - Repeatedly selects the vertex with minimum distance
+  - Updates distances of adjacent vertices
+- The `minDist()` function:
+  - Finds the unvisited vertex with the smallest distance
+- The process is repeated **20 times** for each input size to compute average execution time.
+- Execution time is measured using the `chrono` library.
+- The program outputs the **average time (in milliseconds)** for each input size.
+
+---
+
+### Conclusion
+Dijkstra’s Algorithm efficiently computes shortest paths from a source node in graphs with non-negative weights.  
+Although this implementation has **O(n²)** complexity due to the adjacency matrix and linear search, it is simple and effective for dense graphs.  
+Using advanced data structures like **priority queues (min-heaps)** can further optimize the performance to **O((V + E) log V)**.
+
+## Practical-21: Prim’s Algorithm 
+
+### Aim
+To implement Prim’s algorithm to find the Minimum Spanning Tree (MST) of a graph and analyze its execution time.
+
+---
+
+### Theory
+Prim’s Algorithm is a **greedy algorithm** used to find the Minimum Spanning Tree of a connected, weighted, undirected graph.
+
+A Minimum Spanning Tree is a subset of edges that:
+- Connects all vertices
+- Has no cycles
+- Has the minimum possible total edge weight
+
+Steps involved:
+- Start from any vertex (source)
+- Select the minimum weight edge connecting a visited vertex to an unvisited vertex
+- Add the selected edge to the MST
+- Repeat until all vertices are included
+
+This implementation uses a **priority queue (min-heap)** to efficiently select the next minimum edge.
+
+---
+
+### Graph
+![Graph for Prim’s Algorithm](lab6/primAlgo.png)
+
+---
+
+### Time Complexity
+
+ Case          Complexity           
+ Best Case   :   O(E log V)           
+ Average Case : O(E log V)           
+ Worst Case  :  O(E log V)           
+
+---
+
+### Space Complexity
+- O(V + E) (adjacency list)
+- O(V) (MST set and priority queue)
+
+---
+
+### What the Code Does
+
+- The program generates graphs of different sizes using adjacency lists.
+- The `generateGraph()` function:
+  - Creates a random undirected weighted graph
+  - Assigns random weights between vertices
+- The `primAlgo()` function:
+  - Uses a priority queue (min-heap) to pick the smallest edge
+  - Maintains a visited array (`mstSet`)
+  - Adds edges to the MST while avoiding cycles
+- The process is repeated **50 times** for each graph size to compute average execution time.
+- Execution time is measured using the `chrono` library.
+- The program outputs the **average time (in milliseconds)** for each input size.
+
+---
+
+### Conclusion
+Prim’s Algorithm efficiently constructs a Minimum Spanning Tree using a greedy approach.  
+With the use of a priority queue, it achieves a time complexity of **O(E log V)**, making it suitable for large and sparse graphs.  
+It is widely used in network design, routing, and optimization problems.
+
+## Practical-22: Matrix Chain Multiplication 
+
+### Aim
+To determine the most efficient way to multiply a chain of matrices using Dynamic Programming and minimize the number of scalar multiplications.
+
+---
+
+### Theory
+Matrix Chain Multiplication (MCM) is an optimization problem that determines the best way to multiply a sequence of matrices.
+
+Key idea:
+- Matrix multiplication is **associative**, meaning the order of multiplication can be changed
+- However, different orders result in **different computational costs**
+
+Steps involved:
+- Break the problem into smaller subproblems
+- Compute minimum multiplication cost for each subchain
+- Store results in a table to avoid recomputation (Dynamic Programming)
+- Reconstruct the optimal parenthesization
+
+
+---
+
+### Time Complexity
+
+ Case          Complexity 
+ Best Case   :   O(n³)     
+ Average Case : O(n³)     
+ Worst Case  :  O(n³)     
+
+---
+
+### Space Complexity
+- O(n²) (for cost and split tables)
+
+---
+
+### What the Code Does
+
+- The program defines an array `p[]` representing matrix dimensions
+  - If there are `n` matrices, the array size is `n+1`
+- The `MCM()` function:
+  - Uses Dynamic Programming to compute minimum multiplication cost
+  - Stores results in matrix `m[][]`
+  - Stores optimal split positions in matrix `s[][]`
+- The `printParenthesis()` function:
+  - Recursively prints the optimal parenthesization of matrices
+- The program outputs:
+  - Minimum number of scalar multiplications
+  - Optimal order of multiplication
+
+---
+
+### Conclusion
+Matrix Chain Multiplication efficiently determines the optimal order of matrix multiplication using Dynamic Programming.  
+It reduces redundant computations and ensures the minimum number of operations with a time complexity of **O(n³)**.  
+This approach is widely used in compiler optimization and mathematical computations.
+
+## Practical-23: Multistage Graph 
+
+### Aim
+To find the minimum cost path in a multistage graph using forward and backward dynamic programming approaches.
+
+---
+
+### Theory
+A Multistage Graph is a directed acyclic graph (DAG) divided into multiple stages, where:
+- Each node belongs to a specific stage
+- Edges exist only from one stage to the next
+
+The goal is to find the **minimum cost path** from the source (first stage) to the destination (last stage).
+
+Two approaches are used:
+
+#### Forward Approach
+- Start from the destination node
+- Move backward stage by stage
+- Compute minimum cost to reach the destination
+
+#### Backward Approach
+- Start from the source node
+- Move forward stage by stage
+- Compute minimum cost to reach each node
+
+Both approaches use **Dynamic Programming** to store intermediate results and avoid recomputation.
+
+---
+
+### Time Complexity
+
+ Case         Complexity 
+ Best Case   :   O(n²)     
+ Average Case : O(n²)     
+ Worst Case  :  O(n²)     
+
+---
+
+### Space Complexity
+- O(n²) (cost matrix)
+- O(n) (cost and decision arrays)
+
+---
+
+### What the Code Does
+
+- The program takes the number of vertices as input.
+- A random cost adjacency matrix is generated:
+  - Only forward edges are allowed (upper triangular matrix)
+  - Some edges are assigned zero (no connection)
+- The `findStages()` function:
+  - Determines the number of stages in the graph
+- The `forwardGraph()` function:
+  - Computes minimum cost from source to destination using backward traversal
+- The `backwardGraph()` function:
+  - Computes minimum cost from source using forward traversal
+- The program outputs:
+  - Generated cost matrix
+  - Minimum cost using forward approach
+  - Minimum cost using backward approach
+
+---
+
+### Conclusion
+The Multistage Graph approach efficiently solves shortest path problems in staged graphs using Dynamic Programming.  
+Both forward and backward methods provide optimal solutions while reducing redundant calculations.  
+This technique is widely used in scheduling, resource allocation, and decision-making problems.
