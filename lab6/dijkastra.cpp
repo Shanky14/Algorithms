@@ -79,9 +79,9 @@ vector<vector<int>> generateMatrix(int n)
 
 int main()
 {
-vector<int> sizes = {100, 500, 1000, 5000, 10000, 15000, 20000};
+vector<int> sizes = {100, 500, 1000, 5000, 10000, 15000};
 
-    srand(time(0));
+srand(time(0));
 
     for (int n : sizes)
     {
