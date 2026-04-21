@@ -670,7 +670,7 @@ Binary Search is a highly efficient searching algorithm with **O(log n)** time c
 It significantly reduces the number of comparisons compared to linear search.  
 However, it requires the data to be **sorted**, which is a key limitation.
 
-## Practical-16: Iterative Quick Sort (Using Stack)
+## Practical-16: Iterative Quick Sort 
 
 ### Aim
 To implement the Quick Sort algorithm using an iterative approach (without recursion) and analyze its execution time.
@@ -736,7 +736,58 @@ Iterative Quick Sort successfully eliminates recursion by using a stack-based ap
 It provides similar performance to recursive Quick Sort while avoiding recursion-related overhead and potential stack overflow issues.  
 However, its worst-case time complexity remains **O(n²)** when poor pivot choices are made.
 
-## Practical-17: Fractional Knapsack (Greedy Method)
+## Practical-17: Convex Hull 
+
+### Aim
+To implement the Convex Hull algorithm  and analyze its execution.
+
+---
+
+### Theory
+The Convex Hull of a set of points is the smallest convex polygon that encloses all given points.
+
+The Monotonic Chain algorithm (Andrew’s Algorithm) is an efficient method to compute the convex hull in O(n log n) time.
+
+Steps involved:
+- Sort all points based on x-coordinate (and y if tie)
+- Build the lower hull by traversing left to right
+- Build the upper hull by traversing right to left
+- Remove duplicate points
+- Combine both hulls to form the final convex hull
+
+
+### Time Complexity
+
+ Case     :     Complexity 
+ Best Case   :   O(n log n) 
+ Average Case : O(n log n) 
+ Worst Case  :  O(n log n) 
+
+---
+
+### Space Complexity
+- O(n) for storing hull points
+
+---
+
+### What the Code Does
+
+- The program takes a set of 2D points as input.
+- Points are sorted based on their coordinates.
+- The `orientation()` function determines the turn direction of three points.
+- The `convexHull()` function:
+  - Builds the lower hull
+  - Builds the upper hull
+  - Removes unnecessary points that do not form a convex boundary
+- Both hulls are merged to produce the final convex hull.
+- The program outputs the points forming the convex boundary.
+
+---
+
+### Key Formula
+
+
+## Practical-18: Fractional Knapsack 
 
 ### Aim
 To implement the Fractional Knapsack algorithm using a greedy approach and analyze its execution time.
@@ -797,7 +848,7 @@ The Fractional Knapsack algorithm efficiently maximizes value using a greedy app
 It performs well due to sorting based on value-to-weight ratio and allows partial selection of items.  
 This makes it significantly more efficient than the 0/1 Knapsack for large datasets.
 
-## Practical-18: Kth Smallest Element (Quickselect Algorithm)
+## Practical-19: Kth Smallest Element 
 
 ### Aim
 To find the Kth smallest element in an array using the Quickselect algorithm and analyze its execution time.
@@ -865,7 +916,7 @@ Quickselect efficiently finds the Kth smallest element without sorting the entir
 It has an average time complexity of **O(n)**, making it faster than sorting-based approaches for selection problems.  
 However, its worst-case complexity is **O(n²)** when poor pivot choices are made.
 
-## Practical-19: Find Maximum and Minimum 
+## Practical-20: Find Maximum and Minimum 
 
 ### Aim
 To find the maximum and minimum elements in an array using the Divide and Conquer approach and analyze its execution time.
@@ -928,7 +979,7 @@ This approach reduces the number of comparisons compared to a simple linear scan
 The Divide and Conquer approach efficiently finds both maximum and minimum elements with fewer comparisons than a naive approach.  
 It maintains a linear time complexity of **O(n)** and performs well for large datasets.
 
-## Practical-20: Dijkstra’s Algorithm 
+## Practical-21: Dijkstra’s Algorithm 
 
 ### Aim
 To implement Dijkstra’s algorithm to find the shortest path from a source vertex to all other vertices in a graph and analyze its execution time.
@@ -993,7 +1044,7 @@ Dijkstra’s Algorithm efficiently computes shortest paths from a source node in
 Although this implementation has **O(n²)** complexity due to the adjacency matrix and linear search, it is simple and effective for dense graphs.  
 Using advanced data structures like **priority queues (min-heaps)** can further optimize the performance to **O((V + E) log V)**.
 
-## Practical-21: Prim’s Algorithm 
+## Practical-22: Prim’s Algorithm 
 
 ### Aim
 To implement Prim’s algorithm to find the Minimum Spanning Tree (MST) of a graph and analyze its execution time.
@@ -1059,7 +1110,75 @@ Prim’s Algorithm efficiently constructs a Minimum Spanning Tree using a greedy
 With the use of a priority queue, it achieves a time complexity of **O(E log V)**, making it suitable for large and sparse graphs.  
 It is widely used in network design, routing, and optimization problems.
 
-## Practical-22: Matrix Chain Multiplication 
+## Practical-23: Kruskal’s Algorithm
+
+### Aim
+To implement Kruskal’s Algorithm to find the Minimum Spanning Tree (MST) of a graph.
+
+---
+
+### Theory
+A Minimum Spanning Tree (MST) is a subset of edges in a weighted graph that:
+- Connects all vertices
+- Has no cycles
+- Has the minimum possible total edge weight
+
+Kruskal’s Algorithm is a greedy algorithm that:
+- Selects edges in increasing order of weight
+- Adds an edge only if it does not form a cycle
+
+Steps involved:
+- Sort all edges in increasing order of weight
+- Pick the smallest edge
+- Check if it forms a cycle
+- If no cycle → include it in MST
+- Repeat until (V - 1) edges are selected
+
+---
+
+### Time Complexity
+
+ Case          Complexity 
+ Best Case   :   O(E log E) 
+ Average Case : O(E log E) 
+ Worst Case  :  O(E log E) 
+
+---
+
+### Space Complexity
+- O(V + E)
+
+---
+
+### What the Code Does
+
+- The program defines an `edge` structure with source, destination, and weight.
+- A min-heap (priority queue) is used to always pick the smallest edge.
+- The `isCycle()` function:
+  - Uses DFS to detect if adding an edge creates a cycle
+- The `kruskal()` function:
+  - Extracts edges from the min-heap
+  - Checks for cycles
+  - Adds valid edges to MST
+  - Keeps track of total cost
+- The algorithm stops when (V - 1) edges are added.
+
+---
+
+### Key Concept
+
+Cycle detection using DFS:
+- Before adding an edge (u, v), check if a path already exists between u and v.
+- If yes → adding edge creates cycle → reject it.
+
+---
+
+### Output
+
+- Prints edges included in MST
+- Displays total minimum cost
+
+## Practical-24: Matrix Chain Multiplication 
 
 ### Aim
 To determine the most efficient way to multiply a chain of matrices using Dynamic Programming and minimize the number of scalar multiplications.
@@ -1117,7 +1236,7 @@ Matrix Chain Multiplication efficiently determines the optimal order of matrix m
 It reduces redundant computations and ensures the minimum number of operations with a time complexity of **O(n³)**.  
 This approach is widely used in compiler optimization and mathematical computations.
 
-## Practical-23: Multistage Graph 
+## Practical-25: Multistage Graph 
 
 ### Aim
 To find the minimum cost path in a multistage graph using forward and backward dynamic programming approaches.
