@@ -782,9 +782,10 @@ Steps involved:
 - Both hulls are merged to produce the final convex hull.
 - The program outputs the points forming the convex boundary.
 
----
-
-### Key Formula
+### Conclusion
+The Monotonic Chain algorithm efficiently computes the convex hull with O(n log n) time complexity.  
+It is simple to implement and works well for large datasets.  
+It avoids unnecessary computations by constructing the hull using geometric properties.
 
 
 ## Practical-18: Fractional Knapsack 
@@ -1178,6 +1179,16 @@ Cycle detection using DFS:
 - Prints edges included in MST
 - Displays total minimum cost
 
+
+---
+
+### Conclusion
+Kruskal’s Algorithm efficiently finds the Minimum Spanning Tree using a greedy approach.  
+It ensures minimum total cost while avoiding cycles.  
+However, cycle detection using DFS is less efficient compared to Union-Find, which is preferred for large graphs.
+
+---
+
 ## Practical-24: Matrix Chain Multiplication 
 
 ### Aim
@@ -1304,3 +1315,61 @@ Both approaches use **Dynamic Programming** to store intermediate results and av
 The Multistage Graph approach efficiently solves shortest path problems in staged graphs using Dynamic Programming.  
 Both forward and backward methods provide optimal solutions while reducing redundant calculations.  
 This technique is widely used in scheduling, resource allocation, and decision-making problems.
+
+
+## Practical-26: All-Pairs Shortest Path
+
+### Aim
+To implement the Floyd–Warshall algorithm to find the shortest paths between all pairs of vertices in a graph.
+
+---
+
+### Theory
+The All-Pairs Shortest Path problem finds the shortest distance between every pair of vertices in a graph.
+
+The Floyd–Warshall algorithm is a dynamic programming approach that:
+- Considers each vertex as an intermediate node
+- Updates shortest paths by checking if a shorter path exists via that node
+
+Steps involved:
+- Initialize the distance matrix
+- For each vertex k:
+  - Update all pairs (i, j)
+  - Check if path i → k → j is shorter than i → j
+- Repeat for all vertices
+
+
+### Time Complexity
+
+| Case         | Complexity |
+|-------------|-----------|
+| Best Case    | O(n³) |
+| Average Case | O(n³) |
+| Worst Case   | O(n³) |
+
+---
+
+### Space Complexity
+- O(n²) for distance matrix
+
+---
+
+### What the Code Does
+
+- The program initializes a graph using an adjacency matrix.
+- `INF` represents no direct path between nodes.
+- The `allpairShort()` function:
+  - Uses three nested loops
+  - Updates shortest distances using intermediate nodes
+- The algorithm gradually improves all shortest paths.
+- The final matrix shows shortest distances between every pair of vertices.
+
+---
+
+### Key Formula
+- d[i][j] = min(d[i][j], d[i][k] + d[k][j])
+
+### Conclusion
+The Floyd–Warshall algorithm successfully computes the shortest paths between all pairs of vertices in a graph using a dynamic programming approach.  
+It systematically improves the distance matrix by considering each vertex as an intermediate node.  
+Although its time complexity is O(n³), it is simple to implement and effective for dense graphs.
