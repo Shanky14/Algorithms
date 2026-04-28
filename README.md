@@ -1373,3 +1373,169 @@ Steps involved:
 The Floyd–Warshall algorithm successfully computes the shortest paths between all pairs of vertices in a graph using a dynamic programming approach.  
 It systematically improves the distance matrix by considering each vertex as an intermediate node.  
 Although its time complexity is O(n³), it is simple to implement and effective for dense graphs.
+
+## Practical-27: Longest Common Subsequence (LCS)
+
+### Aim
+To implement the Longest Common Subsequence (LCS) algorithm using Dynamic Programming and print the subsequence.
+
+---
+
+### Theory
+The Longest Common Subsequence (LCS) problem is to find the longest subsequence common to two sequences.
+
+A subsequence:
+- Maintains the order of elements
+- Does not require elements to be contiguous
+
+Dynamic Programming is used to:
+- Break the problem into smaller subproblems
+- Store results in a table to avoid recomputation
+
+The algorithm builds a table that stores lengths of LCS for substrings and then reconstructs the sequence.
+
+---
+
+### Algorithm
+
+1. Start
+2. Input two strings X and Y
+3. Let m = length of X, n = length of Y
+4. Create two tables:
+   - c[m+1][n+1] for lengths
+   - p[m+1][n+1] for path tracking
+5. Initialize first row and column with 0
+6. For i from 1 to m:
+   - For j from 1 to n:
+     - If X[i-1] == Y[j-1]:
+       c[i][j] = 1 + c[i-1][j-1]
+       p[i][j] = 'D'
+     - Else if c[i-1][j] >= c[i][j-1]:
+       c[i][j] = c[i-1][j]
+       p[i][j] = 'U'
+     - Else:
+       c[i][j] = c[i][j-1]
+       p[i][j] = 'L'
+7. LCS length = c[m][n]
+8. Use recursive function to print LCS using table p
+9. Stop
+
+---
+
+### Time Complexity
+
+| Case         | Complexity |
+|-------------|-----------|
+| Best Case    | O(m × n) |
+| Average Case | O(m × n) |
+| Worst Case   | O(m × n) |
+
+---
+
+### Space Complexity
+- O(m × n) for DP tables
+
+---
+
+### What the Code Does
+
+- The program takes two input strings.
+- It builds a DP table to store lengths of common subsequences.
+- A direction table is maintained to reconstruct the sequence.
+- The LCS length is printed from the table.
+- The actual LCS is printed using recursion.
+
+---
+
+### Key Formula
+c[i][j] = 1 + c[i-1][j-1]   (if characters match)  
+c[i][j] = max(c[i-1][j], c[i][j-1])   (otherwise)
+
+---
+
+### Conclusion
+The Longest Common Subsequence problem is efficiently solved using Dynamic Programming.
+The algorithm computes the length of the longest subsequence and reconstructs it using a direction table.
+Although the time complexity is O(m × n), it is practical and widely used in applications like DNA sequence analysis and text comparison.
+
+## Practical-28: 0/1 Knapsack using Dynamic Programming
+
+### Aim
+To implement the 0/1 Knapsack problem using Dynamic Programming and analyze its execution time.
+
+---
+
+### Theory
+The 0/1 Knapsack problem is a classic optimization problem where we are given:
+- A set of items, each with a weight and value
+- A knapsack with a fixed capacity
+
+The objective is to maximize the total value such that the total weight does not exceed the capacity.
+
+In 0/1 Knapsack:
+- Each item can either be included (1) or excluded (0)
+- Fractional selection is not allowed
+
+Dynamic Programming is used to:
+- Break the problem into smaller subproblems
+- Store intermediate results to avoid recomputation
+
+---
+### Graph 
+---
+![Graph Description]()
+
+### Algorithm
+
+1. Start
+2. Input number of items n and capacity W
+3. Initialize DP table dp[n+1][W+1] with 0
+4. For each item i from 1 to n:
+   - For each capacity w from 1 to W:
+     - If wt[i-1] <= w:
+       dp[i][w] = max(val[i-1] + dp[i-1][w - wt[i-1]], dp[i-1][w])
+     - Else:
+       dp[i][w] = dp[i-1][w]
+5. Store result in dp[n][W]
+6. Repeat for multiple runs to calculate average execution time
+7. Print average time for each input size
+8. Stop
+
+---
+
+### Time Complexity
+
+| Case         | Complexity |
+|-------------|-----------|
+| Best Case    | O(n × W) |
+| Average Case | O(n × W) |
+| Worst Case   | O(n × W) |
+
+---
+
+### Space Complexity
+- O(n × W) for DP table
+
+---
+
+### What the Code Does
+
+- The program generates random weights and values for items.
+- It uses a DP table to compute the maximum achievable value.
+- The knapsack() function uses a bottom-up dynamic programming approach.
+- The algorithm is executed multiple times for each input size.
+- Execution time is measured using the chrono library.
+- The average time for each input size is printed.
+
+---
+
+### Key Formula
+dp[i][w] = max(val[i-1] + dp[i-1][w - wt[i-1]], dp[i-1][w])
+
+---
+
+### Conclusion
+The 0/1 Knapsack problem is efficiently solved using Dynamic Programming by storing intermediate results in a table.
+The algorithm guarantees an optimal solution but has pseudo-polynomial time complexity O(n × W), as it depends on both number of items and capacity.
+The experimental results show that execution time increases as input size and capacity increase.
+
