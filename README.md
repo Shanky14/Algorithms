@@ -1,19 +1,30 @@
 ## PRACTICAL -1 
-Aim
+## Aim
 To implement the Bubble Sort algorithm and analyze the time taken to sort a list of numbers.
-
+---
 # Theory
-
+---
 Bubble Sort is a simple comparison-based sorting algorithm.
 It works by repeatedly traversing the array and comparing adjacent elements.
 If the elements are in the wrong order, they are swapped.
 
 After each complete pass, the largest unsorted element “bubbles up” to its correct position at the end of the array.
 This process continues until the entire array is sorted.
-
+---
 ## GRAPH
 ![Graph for bubble sort](LAB%201/bubbleS.png)
-
+---
+## Algorithm 
+1. Start
+2. Input n
+3. Generate array of size n
+4. For i = 0 to n-1:
+      For j = 0 to n-i-2:
+         If a[j] > a[j+1], swap
+5. End loops
+6. Display sorted array
+7. Stop
+---
 ## Time Complexity
 
 Best Case: O(n) (when the array is already sorted, with optimization)
@@ -50,15 +61,20 @@ To implement Horner’s method using recursion to represent a polynomial express
 ## Theory
 Horner’s method is an efficient technique used to represent and evaluate polynomials.
 It reduces the number of multiplications required by rewriting the polynomial in a nested form.
-
-A polynomial of degree n − 1
-
-
-can be rewritten using Horner’s method as:
-
-
 This approach improves efficiency and simplifies polynomial evaluation.
 
+## Algorithm
+
+1. Start
+2. Input coefficients
+3. If last element → print
+4. Else:
+   print "("
+   recursive call
+   print "x + coefficient"
+   print ")"
+5. Stop
+   
 ## Time Complexity
 
 O(n), where n is the number of coefficients
@@ -99,6 +115,14 @@ Otherwise, the function calls itself for the next index.
 
 This method is easy to understand but inefficient for large datasets.
 
+## Algorithm
+1. Start
+2. Input array and target
+3. If index >= n → return -1
+4. If a[index] == target → return index
+5. Else call function with next index
+6. Stop
+   
 ## Time Complexity
 
 Best Case: O(1) (key found at first position)
@@ -142,6 +166,16 @@ This program uses recursion with backtracking to generate permutations.
 At each recursive step, the algorithm fixes one character and recursively permutes the remaining characters.
 After each recursive call, the original order is restored using backtracking.
 
+## Algorithm
+1. Start
+2. If k == n → print string
+3. Else:
+   For i = k to n-1:
+      swap
+      recursive call
+      swap back
+4. Stop
+   
 ## Time Complexity
 
 O(n!), where n is the number of characters
@@ -180,6 +214,19 @@ This process continues until the entire array is sorted.
 ## GRAPH 
 
 ![Graph for selection sort](LAB%201/selectionS.png)
+
+## Algorithm
+Algorithm SelectionSort(A, n)
+
+1. for i ← 1 to n-1 do
+2.     min ← i
+3.     for j ← i+1 to n do
+4.         if A[j] < A[min] then
+5.             min ← j
+6.         end if
+7.     end for
+8.     interchange A[i] and A[min]
+9. end for
 
 ## Time Complexity
 
@@ -223,6 +270,16 @@ A larger disk cannot be placed on top of a smaller disk.
 An auxiliary peg can be used for intermediate moves.
 The recursive solution breaks the problem into smaller subproblems until the base case is reached.
 
+## Algorithm
+TOH(n, source, destination, auxiliary)
+
+1. if n = 1 then
+2.     print move source → destination
+3. else
+4.     TOH(n-1, source, auxiliary, destination)
+5.     print move source → destination
+6.     TOH(n-1, auxiliary, destination, source)
+   
 ## Time Complexity
 
 O(2ⁿ), where n is the number of disks
@@ -255,6 +312,14 @@ In each recursive call, the value is reduced by 42.5% of its current value.
 The process continues until the value becomes less than 1.0.
 A counter is maintained to keep track of the number of recursive calls (tips) required to reach the stopping condition.
 
+## Algorithm
+Reduce(v)
+
+1. if v < 1 then
+2.     return 0
+3. else
+4.     return 1 + Reduce(v - 0.425*v)
+   
 ## Time Complexity 
 O(k), where k is the number of recursive reductions required
 
@@ -283,6 +348,16 @@ To implement and compare two methods to calculate the value of a number raised t
 ## Theory
 The optimized recursive method calculates the result by dividing the exponent into halves, which reduces the number of recursive calls.
 The simple recursive method calculates the result by multiplying the base repeatedly until the exponent becomes zero.
+
+## Algorithm
+Power(x, n)
+
+1. if n = 0 then return 1
+2. y ← Power(x, n/2)
+3. if n is even then
+4.     return y * y
+5. else
+6.     return x * y * y
 
 ## Time Complexity
 - Optimized recursive method: O(log n)
@@ -333,6 +408,16 @@ XOR all numbers from 0 to n.
 XOR the result with all elements in the array.
 The remaining value is the missing number, because all other numbers cancel out.
 
+## Algorithm
+MissingNumber(A, n)
+
+1. x ← 0
+2. for i ← 0 to n do
+3.     x ← x XOR i
+4. for each element e in A do
+5.     x ← x XOR e
+6. return x
+
 ## Time Complexity
 O(n), where n is the size of the array
 
@@ -376,6 +461,14 @@ This element is compared with other elements in the array.
 If a match is found, that element is considered a duplicate.
 
 This approach is easy to understand but not efficient for large datasets.
+
+## Algorithm
+FindDuplicate(A, n)
+
+1. for i ← 1 to n-1 do
+2.     for j ← i+1 to n do
+3.         if A[i] = A[j] then
+4.             return A[i]
 
 ## Time Complexity
 
@@ -432,6 +525,17 @@ This divide-and-conquer approach significantly reduces the number of comparisons
 
 ![Graph for binary search](LAB%202/BinaryS.png)
 
+## Algorithm
+BinarySearch(A, low, high, x)
+
+1. if low > high then return -1
+2. mid ← (low + high)/2
+3. if A[mid] = x then return mid
+4. if x < A[mid] then
+5.     return BinarySearch(A, low, mid-1, x)
+6. else
+7.     return BinarySearch(A, mid+1, high, x)
+
 ## Time Complexity
 
 Best Case: O(1)
@@ -476,6 +580,19 @@ Insertion Sort is easy to understand but inefficient for large inputs.
 ## GRAPH 
 
 ![Graph for Insertion Sort](LAB%202/insertionS.png)
+
+## Algorithm
+InsertionSort(A, n)
+
+1. for i ← 2 to n do
+2.     key ← A[i]
+3.     j ← i-1
+4.     while j ≥ 1 and A[j] > key do
+5.         A[j+1] ← A[j]
+6.         j ← j-1
+7.     end while
+8.     A[j+1] ← key
+
 ## Time Complexity
 
 Best Case: O(n) (already sorted array)
@@ -521,6 +638,14 @@ Unlike simple sorting algorithms, Merge Sort is efficient for large datasets due
 ### Graph
 ![Graph for Merge Sort](lab3/mergeSort.png)
 
+### Algorithm
+MergeSort(A, low, high)
+
+1. if low < high then
+2.     mid ← (low + high)/2
+3.     MergeSort(A, low, mid)
+4.     MergeSort(A, mid+1, high)
+5.     Merge(A, low, mid, high)
 
 ### Time Complexity
 
@@ -579,6 +704,18 @@ In this implementation, the pivot is chosen as the **middle element**, and eleme
 
 ---
 
+### Algorithm 
+
+---
+QuickSort(A, low, high)
+
+1. if low < high then
+2.     p ← Partition(A, low, high)
+3.     QuickSort(A, low, p-1)
+4.     QuickSort(A, p+1, high)
+
+---   
+
 ### Time Complexity
 
  Case          Complexity   
@@ -636,6 +773,22 @@ This process continues until the element is found or the search space becomes em
 
 ---
 
+### Algorithm
+---
+BinarySearch(A, low, high, x)
+Input: Sorted array A, indices low & high, target x
+Output: Index of x or -1
+
+1. if low > high then
+2.     return -1
+3. mid ← (low + high) / 2
+4. if A[mid] = x then
+5.     return mid
+6. if x < A[mid] then
+7.     return BinarySearch(A, low, mid-1, x)
+8. else
+9.     return BinarySearch(A, mid+1, high, x)
+---
 ### Time Complexity
 
  Case          Complexity 
@@ -699,6 +852,33 @@ This approach avoids recursion overhead and helps prevent stack overflow for lar
 
 ---
 
+### Algorithm
+IterativeQuickSort(A, low, high)
+Input: Array A with indices low and high
+Output: Sorted array
+
+1. Create an empty stack S
+2. push(S, low)
+3. push(S, high)
+
+4. while S is not empty do
+5.     high ← pop(S)
+6.     low ← pop(S)
+
+7.     p ← Partition(A, low, high)
+
+8.     if p-1 > low then
+9.         push(S, low)
+10.        push(S, p-1)
+11.    end if
+
+12.    if p+1 < high then
+13.        push(S, p+1)
+14.        push(S, high)
+15.    end if
+16. end while
+
+---
 ### Time Complexity
 
  Case          Complexity   
@@ -755,7 +935,35 @@ Steps involved:
 - Remove duplicate points
 - Combine both hulls to form the final convex hull
 
+---
+### Algorithm
+ConvexHull(P)
+Input: Set of points P
+Output: Convex hull points
 
+1. Sort points in increasing order of x-coordinate
+2. Initialize empty list L (lower hull)
+
+3. for each point p in P do
+4.     while size(L) ≥ 2 and orientation(last2, last1, p) ≤ 0 do
+5.         remove last point from L
+6.     end while
+7.     append p to L
+8. end for
+
+9. Initialize empty list U (upper hull)
+
+10. for each point p in reverse order do
+11.     while size(U) ≥ 2 and orientation(last2, last1, p) ≤ 0 do
+12.         remove last point from U
+13.     end while
+14.     append p to U
+15. end for
+
+16. Remove last element of L and U
+17. return concatenation of L and U
+
+---
 ### Time Complexity
 
  Case     :     Complexity 
@@ -811,7 +1019,32 @@ Greedy strategy:
 
 
 ---
+### Graph 
+![Graph Description](lab5\KnapSack.png)
 
+---
+
+### Algorithm
+FractionalKnapsack(W, items)
+Input: Capacity W, list of items (value, weight)
+Output: Maximum value
+
+1. for each item i do
+2.     compute ratio[i] ← value[i] / weight[i]
+3. sort items in decreasing order of ratio
+
+4. totalValue ← 0
+
+5. for each item i do
+6.     if weight[i] ≤ W then
+7.         W ← W - weight[i]
+8.         totalValue ← totalValue + value[i]
+9.     else
+10.        totalValue ← totalValue + ratio[i] * W
+11.        break
+12. return totalValue
+
+---
 ### Time Complexity
 
  Case         Complexity  
@@ -876,6 +1109,22 @@ This reduces unnecessary computations compared to full sorting.
 
 ### Graph
 ![Graph for Kth Smallest Element](lab5/ksmallest.png)
+
+---
+
+### Algorithm
+QuickSelect(A, low, high, k)
+
+1. if low ≤ high then
+2.     p ← Partition(A, low, high)
+
+3.     if p = k then
+4.         return A[p]
+5.     else if p > k then
+6.         return QuickSelect(A, low, p-1, k)
+7.     else
+8.         return QuickSelect(A, p+1, high, k)
+
 
 ---
 
@@ -946,6 +1195,27 @@ This approach reduces the number of comparisons compared to a simple linear scan
 
 ---
 
+### Algorithm
+MaxMin(A, low, high)
+
+1. if low = high then
+2.     return (A[low], A[low])
+
+3. if high = low + 1 then
+4.     if A[low] < A[high] then
+5.         return (A[low], A[high])
+6.     else
+7.         return (A[high], A[low])
+
+8. mid ← (low + high) / 2
+
+9. (min1, max1) ← MaxMin(A, low, mid)
+10. (min2, max2) ← MaxMin(A, mid+1, high)
+
+11. return (min(min1, min2), max(max1, max2))
+
+---
+
 ### Time Complexity
 
  Case          Complexity 
@@ -1004,6 +1274,21 @@ This implementation uses an **adjacency matrix** and a simple linear search to f
 
 ### Graph
 ![Graph for Dijkstra’s Algorithm](lab6/dijkastra.png)
+
+---
+
+### Algorithm
+Dijkstra(G, n, source)
+
+1. for each vertex v do
+2.     dist[v] ← ∞
+3. dist[source] ← 0
+4. while there exists unvisited vertex do
+5.     u ← vertex with minimum dist
+6.     mark u visited
+7.     for each neighbor v of u do
+8.         if dist[v] > dist[u] + weight(u,v) then
+9.             dist[v] ← dist[u] + weight(u,v)
 
 ---
 
@@ -1075,6 +1360,29 @@ This implementation uses a **priority queue (min-heap)** to efficiently select t
 
 ---
 
+### Algorithm
+### Algorithm
+1. Start  
+2. Input graph G(V, E) using adjacency list  
+3. Initialize:  
+   - Create a priority queue (min-heap) `pq`  
+   - Create array `key[]` and initialize all values to ∞  
+   - Create array `mstSet[]` and initialize all to false  
+   - Set `key[source] = 0`  
+4. Insert source vertex into priority queue  
+5. While priority queue is not empty do:  
+   - Extract vertex `u` with minimum key value  
+   - Mark `u` as visited in `mstSet`  
+   - For each adjacent vertex `v` of `u`:  
+     - If `v` is not in MST and weight(u, v) < key[v]:  
+       - Update `key[v] = weight(u, v)`  
+       - Insert `v` into priority queue  
+6. Repeat until all vertices are included in MST  
+7. Stop  
+
+
+---
+
 ### Time Complexity
 
  Case          Complexity           
@@ -1134,6 +1442,24 @@ Steps involved:
 - Check if it forms a cycle
 - If no cycle → include it in MST
 - Repeat until (V - 1) edges are selected
+
+---
+### Graph 
+![Graph Description](lab6\Kruskal.png)
+
+---
+
+### Algorithm
+1. Start  
+2. Input graph G(V, E)  
+3. Sort all edges in non-decreasing order of weight  
+4. Initialize MST as empty  
+5. For each edge (u, v) in sorted order do:  
+   - Check if including edge forms a cycle  
+   - If no cycle:  
+     - Add edge (u, v) to MST  
+6. Repeat until MST contains (V - 1) edges  
+7. Stop  
 
 ---
 
@@ -1212,6 +1538,23 @@ Steps involved:
 
 ---
 
+### Algorithm
+1. Start  
+2. Input array p[] of matrix dimensions  
+3. Let n = number of matrices  
+4. Create table m[n][n] and initialize m[i][i] = 0  
+5. For chain length L = 2 to n:  
+   - For i = 1 to n-L+1:  
+     - j = i + L - 1  
+     - m[i][j] = ∞  
+     - For k = i to j-1:  
+       - Compute cost = m[i][k] + m[k+1][j] + p[i-1]*p[k]*p[j]  
+       - If cost < m[i][j], update m[i][j]  
+6. Output m[1][n]  
+7. Stop  
+
+---
+
 ### Time Complexity
 
  Case          Complexity 
@@ -1277,6 +1620,17 @@ Both approaches use **Dynamic Programming** to store intermediate results and av
 
 ---
 
+### Algorithm
+1. Start  
+2. Input graph with stages  
+3. Initialize cost[n] = 0  
+4. For i = n-1 to 1 do:  
+   - cost[i] = min(cost[j] + weight(i,j))  
+5. Output cost[1]  
+6. Stop  
+
+---
+
 ### Time Complexity
 
  Case         Complexity 
@@ -1338,6 +1692,19 @@ Steps involved:
   - Check if path i → k → j is shorter than i → j
 - Repeat for all vertices
 
+---
+
+### Algorithm
+1. Start  
+2. Initialize distance matrix d[][]  
+3. For k = 1 to n:  
+   - For i = 1 to n:  
+     - For j = 1 to n:  
+       - d[i][j] = min(d[i][j], d[i][k] + d[k][j])  
+4. Output matrix  
+5. Stop  
+
+---
 
 ### Time Complexity
 
@@ -1482,9 +1849,9 @@ Dynamic Programming is used to:
 
 ---
 ### Graph 
----
-![Graph Description]()
+![Graph Description](lab9\KnapSackDP.png)
 
+---
 ### Algorithm
 
 1. Start
@@ -1538,4 +1905,353 @@ dp[i][w] = max(val[i-1] + dp[i-1][w - wt[i-1]], dp[i-1][w])
 The 0/1 Knapsack problem is efficiently solved using Dynamic Programming by storing intermediate results in a table.
 The algorithm guarantees an optimal solution but has pseudo-polynomial time complexity O(n × W), as it depends on both number of items and capacity.
 The experimental results show that execution time increases as input size and capacity increase.
+
+## Practical-30: N-Queens Problem
+
+### Aim
+To solve the N-Queens problem using Backtracking and print all possible solutions.
+
+---
+
+### Theory
+The N-Queens problem is a classic problem in computer science where the goal is to place **N queens on an N×N chessboard** such that:
+
+- No two queens attack each other  
+- No two queens are in the same row  
+- No two queens are in the same column  
+- No two queens are on the same diagonal  
+
+Backtracking is used to solve this problem:
+- Place queens one row at a time  
+- Check if the current position is safe  
+- If safe → place queen and move to next row  
+- If not safe → try next column  
+- If no column works → backtrack  
+
+---
+
+### Algorithm
+1. Start  
+2. Input number of queens `n`  
+3. Initialize array `x[n]` to store queen positions  
+4. Define function `place(k, i)`:
+   - For each previous queen `j = 0 to k-1`:
+     - If `x[j] == i` OR `abs(x[j] - i) == abs(j - k)`:
+       - Return false  
+   - Return true  
+5. Define recursive function `NQueen(k, n)`:
+   - For column `i = 0 to n-1`:
+     - If `place(k, i)` is true:
+       - Set `x[k] = i`  
+       - If `k == n-1`:
+         - Print solution  
+       - Else:
+         - Call `NQueen(k + 1, n)`  
+6. Call `NQueen(0, n)`  
+7. Stop  
+
+---
+
+### Time Complexity
+
+| Case          | Complexity |
+|--------------|-----------|
+| Best Case    | O(n!) |
+| Average Case | O(n!) |
+| Worst Case   | O(n!) |
+
+---
+
+### Space Complexity
+- O(n) (for storing positions of queens)
+- O(n) (recursion stack)
+
+---
+
+### What the Code Does
+
+- The program takes input `n` (number of queens).  
+- Uses a vector `x[]` to store column positions of queens.  
+- The `place()` function:
+  - Checks if a queen can be placed safely  
+  - Ensures no conflicts in column or diagonal  
+- The `NQueen()` function:
+  - Recursively places queens row by row  
+  - Uses backtracking when a conflict occurs  
+- When a valid arrangement is found:
+  - The positions of queens are printed  
+
+---
+
+### Conclusion
+The N-Queens problem is efficiently solved using Backtracking.  
+It systematically explores all possible configurations and eliminates invalid ones early.  
+Although the time complexity is high, it demonstrates the power of recursion and constraint-based problem solving.
+
+## Practical-31: Sum of Subsets
+
+### Aim
+To find all subsets of a given set of weights whose sum is equal to a given target using Backtracking.
+
+---
+
+### Theory
+The Sum of Subsets problem is a classic backtracking problem where the goal is to find all subsets whose sum equals a given value.
+
+Given:
+- A set of weights  
+- A target sum `m`  
+
+We need to:
+- Find all possible subsets whose total sum equals `m`  
+
+Backtracking approach:
+- Include or exclude each element  
+- Explore all possible combinations  
+- Prune branches that cannot lead to a valid solution  
+
+Bounding conditions are used to improve efficiency:
+- If current sum exceeds target → stop exploring  
+- If remaining elements cannot reach target → prune  
+
+---
+
+### Algorithm
+1. Start  
+2. Input number of elements `n`  
+3. Input weights array `w[]`  
+4. Input target sum `m`  
+5. Compute total sum `r` of all elements  
+6. Initialize solution array `x[]`  
+7. Define function `sumofSubset(s, k, r)`:
+   - Set `x[k] = 1` (include element)  
+   - If `s + w[k] == m`:
+     - Print current subset  
+   - Else if `k+1 < n` AND `s + w[k] + w[k+1] <= m`:
+     - Call `sumofSubset(s + w[k], k+1, r - w[k])`  
+   - If `k+1 < n` AND `s + r - w[k] >= m` AND `s + w[k] <= m`:
+     - Set `x[k] = 0` (exclude element)  
+     - Call `sumofSubset(s, k+1, r - w[k])`  
+8. Call `sumofSubset(0, 0, totalSum)`  
+9. Stop  
+
+---
+
+### Time Complexity
+
+| Case          | Complexity |
+|--------------|-----------|
+| Best Case    | O(2ⁿ) |
+| Average Case | O(2ⁿ) |
+| Worst Case   | O(2ⁿ) |
+
+---
+
+### Space Complexity
+- O(n) (solution vector)
+- O(n) (recursion stack)
+
+---
+
+### What the Code Does
+
+- The program takes:
+  - Number of elements `n`  
+  - Weights array `w[]`  
+  - Target sum `m`  
+- Computes total sum of elements  
+- Uses array `x[]` to track inclusion/exclusion  
+- The `sumofSubset()` function:
+  - Recursively explores subsets  
+  - Includes/excludes elements  
+  - Uses bounding conditions to prune search space  
+- When a valid subset is found:
+  - It prints the subset elements  
+
+---
+
+
+### Conclusion
+The Sum of Subsets problem is efficiently solved using Backtracking with pruning.  
+Although the worst-case time complexity is exponential, bounding conditions significantly reduce unnecessary computations.  
+It demonstrates the power of recursive problem solving and constraint satisfaction.
+
+# Practical-32: M-Coloring Problem
+
+## Aim
+To implement the M-Coloring problem using Backtracking and print all possible valid colorings of a graph.
+
+---
+
+## Theory
+The M-Coloring problem is a graph coloring problem where we assign colors to vertices such that:
+
+- No two adjacent vertices have the same color  
+- At most `m` colors are used  
+
+This problem is solved using **Backtracking**:
+- Assign colors one by one to vertices  
+- Check if the assignment is valid  
+- If not valid, try another color (backtrack)  
+
+---
+
+## Algorithm 
+
+1. Start  
+2. Input number of vertices `n`  
+3. Input number of colors `m`  
+4. Input adjacency matrix `adj[1..n][1..n]`  
+5. Initialize color array `x[1..n] = 0`  
+
+6. Define function `NextValue(k)`:
+   - Repeat:
+     - Set `x[k] = (x[k] + 1) mod (m + 1)`  
+     - If `x[k] == 0`, return  
+     - For `j = 1 to n`:
+       - If `adj[k][j] == 1` AND `x[k] == x[j]`, break  
+     - If `j == n + 1`, return  
+   - Until valid color is found  
+
+7. Define function `mColoring(k)`:
+   - Repeat:
+     - Call `NextValue(k)`  
+     - If `x[k] == 0`, return  
+     - If `k == n`, print solution  
+     - Else call `mColoring(k + 1)`  
+   - Until all possibilities are explored  
+
+8. Call `mColoring(1)`  
+9. Stop  
+
+---
+
+## Time Complexity
+
+| Case          | Complexity |
+|--------------|-----------|
+| Best Case    | O(mⁿ) |
+| Average Case | O(mⁿ) |
+| Worst Case   | O(mⁿ) |
+
+---
+
+## Space Complexity
+- O(n) (color array)  
+- O(n) (recursion stack)  
+
+---
+
+## What the Code Does
+
+- Takes number of vertices and colors as input  
+- Accepts adjacency matrix of the graph  
+- Uses backtracking to assign colors to vertices  
+- Ensures adjacent vertices do not share the same color  
+- Prints all valid color combinations  
+
+---
+
+## Conclusion
+- The M-Coloring problem is efficiently solved using Backtracking.
+- It explores all possible color assignments while ensuring constraints are satisfied.
+- Although the time complexity is high (O(mⁿ)), it guarantees all valid solutions.
+
+# Practical-33: Hamiltonian Cycle
+
+## Aim
+To find all Hamiltonian cycles in a given graph using Backtracking.
+
+---
+
+## Theory
+A Hamiltonian Cycle is a cycle in a graph that:
+
+- Visits each vertex exactly once  
+- Returns to the starting vertex  
+
+The problem is to determine all such possible cycles in a given graph.
+
+Backtracking approach:
+- Start from a fixed vertex  
+- Add vertices one by one  
+- Ensure:
+  - No vertex is repeated  
+  - There exists an edge between consecutive vertices  
+- Check if last vertex connects back to the first  
+
+If constraints fail → backtrack  
+
+---
+
+## Algorithm 
+
+1. Start  
+2. Input number of vertices `n`  
+3. Input adjacency matrix `adj[1..n][1..n]`  
+4. Initialize array `x[1..n] = 0`  
+5. Set starting vertex `x[1] = 1`  
+
+6. Define function `NextValue(k)`:
+   - Repeat:
+     - Set `x[k] = (x[k] + 1) mod (n + 1)`  
+     - If `x[k] == 0`, return  
+     - If there is an edge between `x[k-1]` and `x[k]`:
+       - Check for repetition:
+         - For `j = 1 to k-1`:
+           - If `x[j] == x[k]`, break  
+       - If no repetition:
+         - If `(k < n)` OR `(k == n AND edge exists between x[n] and x[1])`:
+           - Return  
+
+   - Until valid vertex is found  
+
+7. Define function `Hamiltonian(k)`:
+   - Repeat:
+     - Call `NextValue(k)`  
+     - If `x[k] == 0`, return  
+     - If `k == n`:
+       - Print Hamiltonian cycle  
+     - Else:
+       - Call `Hamiltonian(k + 1)`  
+   - Until all possibilities are explored  
+
+8. Call `Hamiltonian(2)`  
+9. Stop  
+
+---
+
+## Time Complexity
+
+| Case          | Complexity |
+|--------------|-----------|
+| Best Case    | O(n!) |
+| Average Case | O(n!) |
+| Worst Case   | O(n!) |
+
+---
+
+## Space Complexity
+- O(n) (solution array)  
+- O(n) (recursion stack)  
+
+---
+
+## What the Code Does
+
+- Takes number of vertices and adjacency matrix as input  
+- Fixes starting vertex to avoid duplicate cycles  
+- Uses backtracking to generate permutations of vertices  
+- Ensures:
+  - No vertex is repeated  
+  - Consecutive vertices are connected  
+  - Last vertex connects back to first  
+- Prints all Hamiltonian cycles  
+
+---
+
+## Conclusion 
+- The Hamiltonian Cycle problem is solved using Backtracking by exploring all possible vertex permutations.
+- Although the time complexity is high (O(n!)), it guarantees finding all valid cycles.
+- It is a classic example of constraint-based combinatorial problems.
 
