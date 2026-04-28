@@ -670,7 +670,7 @@ Binary Search is a highly efficient searching algorithm with **O(log n)** time c
 It significantly reduces the number of comparisons compared to linear search.  
 However, it requires the data to be **sorted**, which is a key limitation.
 
-## Practical-16: Iterative Quick Sort (Using Stack)
+## Practical-16: Iterative Quick Sort 
 
 ### Aim
 To implement the Quick Sort algorithm using an iterative approach (without recursion) and analyze its execution time.
@@ -736,7 +736,59 @@ Iterative Quick Sort successfully eliminates recursion by using a stack-based ap
 It provides similar performance to recursive Quick Sort while avoiding recursion-related overhead and potential stack overflow issues.  
 However, its worst-case time complexity remains **O(n²)** when poor pivot choices are made.
 
-## Practical-17: Fractional Knapsack (Greedy Method)
+## Practical-17: Convex Hull 
+
+### Aim
+To implement the Convex Hull algorithm  and analyze its execution.
+
+---
+
+### Theory
+The Convex Hull of a set of points is the smallest convex polygon that encloses all given points.
+
+The Monotonic Chain algorithm (Andrew’s Algorithm) is an efficient method to compute the convex hull in O(n log n) time.
+
+Steps involved:
+- Sort all points based on x-coordinate (and y if tie)
+- Build the lower hull by traversing left to right
+- Build the upper hull by traversing right to left
+- Remove duplicate points
+- Combine both hulls to form the final convex hull
+
+
+### Time Complexity
+
+ Case     :     Complexity 
+ Best Case   :   O(n log n) 
+ Average Case : O(n log n) 
+ Worst Case  :  O(n log n) 
+
+---
+
+### Space Complexity
+- O(n) for storing hull points
+
+---
+
+### What the Code Does
+
+- The program takes a set of 2D points as input.
+- Points are sorted based on their coordinates.
+- The `orientation()` function determines the turn direction of three points.
+- The `convexHull()` function:
+  - Builds the lower hull
+  - Builds the upper hull
+  - Removes unnecessary points that do not form a convex boundary
+- Both hulls are merged to produce the final convex hull.
+- The program outputs the points forming the convex boundary.
+
+### Conclusion
+The Monotonic Chain algorithm efficiently computes the convex hull with O(n log n) time complexity.  
+It is simple to implement and works well for large datasets.  
+It avoids unnecessary computations by constructing the hull using geometric properties.
+
+
+## Practical-18: Fractional Knapsack 
 
 ### Aim
 To implement the Fractional Knapsack algorithm using a greedy approach and analyze its execution time.
@@ -797,7 +849,7 @@ The Fractional Knapsack algorithm efficiently maximizes value using a greedy app
 It performs well due to sorting based on value-to-weight ratio and allows partial selection of items.  
 This makes it significantly more efficient than the 0/1 Knapsack for large datasets.
 
-## Practical-18: Kth Smallest Element (Quickselect Algorithm)
+## Practical-19: Kth Smallest Element 
 
 ### Aim
 To find the Kth smallest element in an array using the Quickselect algorithm and analyze its execution time.
@@ -865,7 +917,7 @@ Quickselect efficiently finds the Kth smallest element without sorting the entir
 It has an average time complexity of **O(n)**, making it faster than sorting-based approaches for selection problems.  
 However, its worst-case complexity is **O(n²)** when poor pivot choices are made.
 
-## Practical-19: Find Maximum and Minimum 
+## Practical-20: Find Maximum and Minimum 
 
 ### Aim
 To find the maximum and minimum elements in an array using the Divide and Conquer approach and analyze its execution time.
@@ -928,7 +980,7 @@ This approach reduces the number of comparisons compared to a simple linear scan
 The Divide and Conquer approach efficiently finds both maximum and minimum elements with fewer comparisons than a naive approach.  
 It maintains a linear time complexity of **O(n)** and performs well for large datasets.
 
-## Practical-20: Dijkstra’s Algorithm 
+## Practical-21: Dijkstra’s Algorithm 
 
 ### Aim
 To implement Dijkstra’s algorithm to find the shortest path from a source vertex to all other vertices in a graph and analyze its execution time.
@@ -993,7 +1045,7 @@ Dijkstra’s Algorithm efficiently computes shortest paths from a source node in
 Although this implementation has **O(n²)** complexity due to the adjacency matrix and linear search, it is simple and effective for dense graphs.  
 Using advanced data structures like **priority queues (min-heaps)** can further optimize the performance to **O((V + E) log V)**.
 
-## Practical-21: Prim’s Algorithm 
+## Practical-22: Prim’s Algorithm 
 
 ### Aim
 To implement Prim’s algorithm to find the Minimum Spanning Tree (MST) of a graph and analyze its execution time.
@@ -1059,7 +1111,85 @@ Prim’s Algorithm efficiently constructs a Minimum Spanning Tree using a greedy
 With the use of a priority queue, it achieves a time complexity of **O(E log V)**, making it suitable for large and sparse graphs.  
 It is widely used in network design, routing, and optimization problems.
 
-## Practical-22: Matrix Chain Multiplication 
+## Practical-23: Kruskal’s Algorithm
+
+### Aim
+To implement Kruskal’s Algorithm to find the Minimum Spanning Tree (MST) of a graph.
+
+---
+
+### Theory
+A Minimum Spanning Tree (MST) is a subset of edges in a weighted graph that:
+- Connects all vertices
+- Has no cycles
+- Has the minimum possible total edge weight
+
+Kruskal’s Algorithm is a greedy algorithm that:
+- Selects edges in increasing order of weight
+- Adds an edge only if it does not form a cycle
+
+Steps involved:
+- Sort all edges in increasing order of weight
+- Pick the smallest edge
+- Check if it forms a cycle
+- If no cycle → include it in MST
+- Repeat until (V - 1) edges are selected
+
+---
+
+### Time Complexity
+
+ Case          Complexity 
+ Best Case   :   O(E log E) 
+ Average Case : O(E log E) 
+ Worst Case  :  O(E log E) 
+
+---
+
+### Space Complexity
+- O(V + E)
+
+---
+
+### What the Code Does
+
+- The program defines an `edge` structure with source, destination, and weight.
+- A min-heap (priority queue) is used to always pick the smallest edge.
+- The `isCycle()` function:
+  - Uses DFS to detect if adding an edge creates a cycle
+- The `kruskal()` function:
+  - Extracts edges from the min-heap
+  - Checks for cycles
+  - Adds valid edges to MST
+  - Keeps track of total cost
+- The algorithm stops when (V - 1) edges are added.
+
+---
+
+### Key Concept
+
+Cycle detection using DFS:
+- Before adding an edge (u, v), check if a path already exists between u and v.
+- If yes → adding edge creates cycle → reject it.
+
+---
+
+### Output
+
+- Prints edges included in MST
+- Displays total minimum cost
+
+
+---
+
+### Conclusion
+Kruskal’s Algorithm efficiently finds the Minimum Spanning Tree using a greedy approach.  
+It ensures minimum total cost while avoiding cycles.  
+However, cycle detection using DFS is less efficient compared to Union-Find, which is preferred for large graphs.
+
+---
+
+## Practical-24: Matrix Chain Multiplication 
 
 ### Aim
 To determine the most efficient way to multiply a chain of matrices using Dynamic Programming and minimize the number of scalar multiplications.
@@ -1117,7 +1247,7 @@ Matrix Chain Multiplication efficiently determines the optimal order of matrix m
 It reduces redundant computations and ensures the minimum number of operations with a time complexity of **O(n³)**.  
 This approach is widely used in compiler optimization and mathematical computations.
 
-## Practical-23: Multistage Graph 
+## Practical-25: Multistage Graph 
 
 ### Aim
 To find the minimum cost path in a multistage graph using forward and backward dynamic programming approaches.
@@ -1185,3 +1315,227 @@ Both approaches use **Dynamic Programming** to store intermediate results and av
 The Multistage Graph approach efficiently solves shortest path problems in staged graphs using Dynamic Programming.  
 Both forward and backward methods provide optimal solutions while reducing redundant calculations.  
 This technique is widely used in scheduling, resource allocation, and decision-making problems.
+
+
+## Practical-26: All-Pairs Shortest Path
+
+### Aim
+To implement the Floyd–Warshall algorithm to find the shortest paths between all pairs of vertices in a graph.
+
+---
+
+### Theory
+The All-Pairs Shortest Path problem finds the shortest distance between every pair of vertices in a graph.
+
+The Floyd–Warshall algorithm is a dynamic programming approach that:
+- Considers each vertex as an intermediate node
+- Updates shortest paths by checking if a shorter path exists via that node
+
+Steps involved:
+- Initialize the distance matrix
+- For each vertex k:
+  - Update all pairs (i, j)
+  - Check if path i → k → j is shorter than i → j
+- Repeat for all vertices
+
+
+### Time Complexity
+
+| Case         | Complexity |
+|-------------|-----------|
+| Best Case    | O(n³) |
+| Average Case | O(n³) |
+| Worst Case   | O(n³) |
+
+---
+
+### Space Complexity
+- O(n²) for distance matrix
+
+---
+
+### What the Code Does
+
+- The program initializes a graph using an adjacency matrix.
+- `INF` represents no direct path between nodes.
+- The `allpairShort()` function:
+  - Uses three nested loops
+  - Updates shortest distances using intermediate nodes
+- The algorithm gradually improves all shortest paths.
+- The final matrix shows shortest distances between every pair of vertices.
+
+---
+
+### Key Formula
+- d[i][j] = min(d[i][j], d[i][k] + d[k][j])
+
+### Conclusion
+The Floyd–Warshall algorithm successfully computes the shortest paths between all pairs of vertices in a graph using a dynamic programming approach.  
+It systematically improves the distance matrix by considering each vertex as an intermediate node.  
+Although its time complexity is O(n³), it is simple to implement and effective for dense graphs.
+
+## Practical-27: Longest Common Subsequence (LCS)
+
+### Aim
+To implement the Longest Common Subsequence (LCS) algorithm using Dynamic Programming and print the subsequence.
+
+---
+
+### Theory
+The Longest Common Subsequence (LCS) problem is to find the longest subsequence common to two sequences.
+
+A subsequence:
+- Maintains the order of elements
+- Does not require elements to be contiguous
+
+Dynamic Programming is used to:
+- Break the problem into smaller subproblems
+- Store results in a table to avoid recomputation
+
+The algorithm builds a table that stores lengths of LCS for substrings and then reconstructs the sequence.
+
+---
+
+### Algorithm
+
+1. Start
+2. Input two strings X and Y
+3. Let m = length of X, n = length of Y
+4. Create two tables:
+   - c[m+1][n+1] for lengths
+   - p[m+1][n+1] for path tracking
+5. Initialize first row and column with 0
+6. For i from 1 to m:
+   - For j from 1 to n:
+     - If X[i-1] == Y[j-1]:
+       c[i][j] = 1 + c[i-1][j-1]
+       p[i][j] = 'D'
+     - Else if c[i-1][j] >= c[i][j-1]:
+       c[i][j] = c[i-1][j]
+       p[i][j] = 'U'
+     - Else:
+       c[i][j] = c[i][j-1]
+       p[i][j] = 'L'
+7. LCS length = c[m][n]
+8. Use recursive function to print LCS using table p
+9. Stop
+
+---
+
+### Time Complexity
+
+| Case         | Complexity |
+|-------------|-----------|
+| Best Case    | O(m × n) |
+| Average Case | O(m × n) |
+| Worst Case   | O(m × n) |
+
+---
+
+### Space Complexity
+- O(m × n) for DP tables
+
+---
+
+### What the Code Does
+
+- The program takes two input strings.
+- It builds a DP table to store lengths of common subsequences.
+- A direction table is maintained to reconstruct the sequence.
+- The LCS length is printed from the table.
+- The actual LCS is printed using recursion.
+
+---
+
+### Key Formula
+c[i][j] = 1 + c[i-1][j-1]   (if characters match)  
+c[i][j] = max(c[i-1][j], c[i][j-1])   (otherwise)
+
+---
+
+### Conclusion
+The Longest Common Subsequence problem is efficiently solved using Dynamic Programming.
+The algorithm computes the length of the longest subsequence and reconstructs it using a direction table.
+Although the time complexity is O(m × n), it is practical and widely used in applications like DNA sequence analysis and text comparison.
+
+## Practical-28: 0/1 Knapsack using Dynamic Programming
+
+### Aim
+To implement the 0/1 Knapsack problem using Dynamic Programming and analyze its execution time.
+
+---
+
+### Theory
+The 0/1 Knapsack problem is a classic optimization problem where we are given:
+- A set of items, each with a weight and value
+- A knapsack with a fixed capacity
+
+The objective is to maximize the total value such that the total weight does not exceed the capacity.
+
+In 0/1 Knapsack:
+- Each item can either be included (1) or excluded (0)
+- Fractional selection is not allowed
+
+Dynamic Programming is used to:
+- Break the problem into smaller subproblems
+- Store intermediate results to avoid recomputation
+
+---
+### Graph 
+---
+![Graph Description]()
+
+### Algorithm
+
+1. Start
+2. Input number of items n and capacity W
+3. Initialize DP table dp[n+1][W+1] with 0
+4. For each item i from 1 to n:
+   - For each capacity w from 1 to W:
+     - If wt[i-1] <= w:
+       dp[i][w] = max(val[i-1] + dp[i-1][w - wt[i-1]], dp[i-1][w])
+     - Else:
+       dp[i][w] = dp[i-1][w]
+5. Store result in dp[n][W]
+6. Repeat for multiple runs to calculate average execution time
+7. Print average time for each input size
+8. Stop
+
+---
+
+### Time Complexity
+
+| Case         | Complexity |
+|-------------|-----------|
+| Best Case    | O(n × W) |
+| Average Case | O(n × W) |
+| Worst Case   | O(n × W) |
+
+---
+
+### Space Complexity
+- O(n × W) for DP table
+
+---
+
+### What the Code Does
+
+- The program generates random weights and values for items.
+- It uses a DP table to compute the maximum achievable value.
+- The knapsack() function uses a bottom-up dynamic programming approach.
+- The algorithm is executed multiple times for each input size.
+- Execution time is measured using the chrono library.
+- The average time for each input size is printed.
+
+---
+
+### Key Formula
+dp[i][w] = max(val[i-1] + dp[i-1][w - wt[i-1]], dp[i-1][w])
+
+---
+
+### Conclusion
+The 0/1 Knapsack problem is efficiently solved using Dynamic Programming by storing intermediate results in a table.
+The algorithm guarantees an optimal solution but has pseudo-polynomial time complexity O(n × W), as it depends on both number of items and capacity.
+The experimental results show that execution time increases as input size and capacity increase.
+
