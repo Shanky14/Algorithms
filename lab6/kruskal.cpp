@@ -1,7 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include<chrono>
 using namespace std;
+using namespace std::chrono ;
 struct edge
 {
     int u, v, weight;
@@ -63,7 +65,7 @@ void kruskal(int v, const vector<edge> &edges)
         }
     }
 
-    if (mst.size() != v-1)
+    /*if (mst.size() != v-1)
     {
         cout<< "No spanning tree exist \n";
         return;
@@ -74,27 +76,51 @@ void kruskal(int v, const vector<edge> &edges)
         cout<<e.u<<" -> "<< e.v <<" : "<<e.weight <<endl;
     }
 
-    cout<<"Minimum Cost: "<<minCost<<endl;
+    cout<<"Minimum Cost: "<<minCost<<endl;*/
     
+}
+vector<edge> generateEdges(int v, int e)
+{
+    vector<edge> edges;
+
+    while (edges.size() < e)
+    {
+        int u = rand() % v;
+        int vtx = rand() % v;
+
+        if (u == vtx) continue; 
+        int wt = rand() % 100 + 1;
+        edges.push_back({u, vtx, wt});
+    }
+
+    return edges;
 }
 
 int main()
 {
-    int v = 6;
+    vector<int> sizes = {100, 500, 1000, 3000, 5000, 7000, 10000};
 
-    vector<edge> edges = {
-        {0, 1, 4},
-        {0, 2, 4},
-        {1, 2, 2},
-        {1, 3, 5},
-        {2, 3, 5},
-        {2, 4, 9},
-        {3, 4, 7},
-        {3, 5, 2},
-        {4, 5, 8}
-    };
+    srand(time(0));
 
-    kruskal(v, edges);
+    for (int v : sizes)
+    {
+        int e = v * 2; 
+        double avg = 0;
+
+        for (int run = 0; run < 20; run++)
+        {
+            vector<edge> edges = generateEdges(v, e);
+
+            auto start = high_resolution_clock::now();
+            kruskal(v, edges);
+            auto end = high_resolution_clock::now();
+
+            auto duration = duration_cast<milliseconds>(end - start);
+            avg += duration.count();
+        }
+
+        cout << avg / 20 << ",";
+    }
 
     return 0;
 }

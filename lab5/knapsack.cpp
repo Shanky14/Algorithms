@@ -61,7 +61,7 @@ vector<pair<float,float>> generateItems(int n)
 
 int main()
 {
-    vector<int> sizes = {100, 500, 1000, 5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000};
+    vector<int> sizes = {100, 500, 1000, 5000, 10000, 15000, 20000};
 
     srand(time(0));
 
