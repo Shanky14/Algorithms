@@ -1906,6 +1906,91 @@ The 0/1 Knapsack problem is efficiently solved using Dynamic Programming by stor
 The algorithm guarantees an optimal solution but has pseudo-polynomial time complexity O(n × W), as it depends on both number of items and capacity.
 The experimental results show that execution time increases as input size and capacity increase.
 
+# Practical-32: Travelling Salesman Problem (TSP)
+
+## Aim
+To find the minimum cost tour that visits all cities exactly once and returns to the starting city.
+
+---
+
+## Theory
+The Travelling Salesman Problem (TSP) is a classic optimization problem where:
+
+- A salesman must visit all cities exactly once  
+- Return to the starting city  
+- Minimize the total travel cost  
+ 
+
+###  Dynamic Programming (Bitmasking)
+- Use bitmask to represent visited cities  
+- Store intermediate results to avoid recomputation  
+- Build solution iteratively  
+
+---
+
+
+## Algorithm (Dynamic Programming - Bitmasking)
+
+1. Start  
+2. Input number of cities `n`  
+3. Input cost matrix `cost[n][n]`  
+4. Define `VISITED_ALL = 2ⁿ`  
+5. Create DP table `dp[mask][i]`:
+   - `mask` represents visited cities  
+   - `i` represents current city  
+6. Initialize:
+   - `dp[1][0] = 0`  
+7. For each `mask` from `1` to `VISITED_ALL - 1`:
+   - For each city `j`:
+     - If `j` is included in `mask`:
+       - For each city `k` not in `mask`:
+         - Update:
+           - `dp[mask | (1 << k)][k] = min(dp[mask | (1 << k)][k], dp[mask][j] + cost[j][k])`  
+
+8. Compute answer:
+   - `min(dp[VISITED_ALL - 1][i] + cost[i][0])`  
+
+9. Stop  
+
+---
+
+## Time Complexity
+
+---
+
+### Dynamic Programming
+| Case          | Complexity |
+|--------------|-----------|
+| Best Case    | O(n² · 2ⁿ) |
+| Average Case | O(n² · 2ⁿ) |
+| Worst Case   | O(n² · 2ⁿ) |
+
+---
+
+## Space Complexity
+ 
+- Dynamic Programming: O(n · 2ⁿ)  
+
+---
+
+## What the Code Does
+
+- Defines a cost matrix representing distances between cities  
+- Uses Dynamic Programming with bitmasking  
+- Tracks visited cities using binary representation  
+- Computes minimum cost tour efficiently  
+- Returns minimum travel cost  
+
+---
+
+## Conclusion
+- The Travelling Salesman Problem is a fundamental optimization problem.
+- Backtracking guarantees optimal solution but is inefficient (O(n!))
+- Dynamic Programming significantly improves performance to O(n²·2ⁿ)
+- It is widely used in logistics, routing, and network optimization problems.
+
+
+
 ## Practical-30: N-Queens Problem
 
 ### Aim
