@@ -65,7 +65,7 @@ void kruskal(int v, const vector<edge> &edges)
         }
     }
 
-    /*if (mst.size() != v-1)
+    if (mst.size() != v-1)
     {
         cout<< "No spanning tree exist \n";
         return;
@@ -76,7 +76,7 @@ void kruskal(int v, const vector<edge> &edges)
         cout<<e.u<<" -> "<< e.v <<" : "<<e.weight <<endl;
     }
 
-    cout<<"Minimum Cost: "<<minCost<<endl;*/
+    cout<<"Minimum Cost: "<<minCost<<endl;
     
 }
 vector<edge> generateEdges(int v, int e)

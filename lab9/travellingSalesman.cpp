@@ -1,48 +1,43 @@
 #include <iostream>
 #include <vector>
-#include<algorithm>
+#include <climits>
 using namespace std;
 
-int DFS(vector<vector<int>> &cost, vector<bool> &vis, int last, int count)
-{
-    int n = cost.size();
+int tsp_dp(int n, vector<vector<int>>& cost) {
+    int VISITED_ALL = 1 << n;
+    vector<vector<int>> dp(VISITED_ALL, vector<int>(n, INT_MAX));
 
-    if (count == n)
-        return cost[last][0];
+    dp[1][0] = 0;
 
-    int minCost = (int)1e9;
-
-    for (int i = 1; i <= n; i++)
-    {
-        if (!vis[i])
-        {
-            vis[i] = true;
-            minCost = min(minCost, cost[last][i] + DFS(cost, vis, i, count));
-            vis[i] = false;
+    for (int i = 1; i < VISITED_ALL; i++) {
+        for (int j = 0; j < n; j++) {
+            if ((i & (1 << j)) == 0) continue;
+            for (int k = 0; k < n; k++) {
+                if ((i & (1 << k)) != 0) continue;
+                int newMask = i | (1 << k);
+                dp[newMask][k] = min(dp[newMask][k], dp[i][j] + cost[j][k]);
+            }
         }
     }
-    return minCost;
+
+    int ans = INT_MAX;
+    for (int i = 0; i < n; i++) {
+        ans = min(ans, dp[VISITED_ALL - 1][i] + cost[i][0]);
+    }
+    return ans;
 }
 
-int tsp(vector<vector<int>> &cost)
-{
-    int n = cost.size();
+int main() {
+    int n = 4;
 
-    vector<bool> vis(n, false);
-    vis[0] = true;
-
-    return DFS(cost, vis, 0, 1);
-}
-
-int main()
-{
     vector<vector<int>> cost = {
         {0, 10, 15, 20},
         {10, 0, 35, 25},
         {15, 35, 0, 30},
-        {20, 25, 30, 0}};
+        {20, 25, 30, 0}
+    };
 
-    int res = tsp(cost);
-    cout << res;
+    cout << "DP cost: " << tsp_dp(n, cost) << endl;
+
     return 0;
 }
