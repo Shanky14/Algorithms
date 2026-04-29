@@ -37,6 +37,21 @@ Worst Case: O(n²)
 
 O(1) (In-place sorting, no extra memory required)
 
+## Code
+```
+void bubbleS(vector<int> &a)
+{
+    for (int i = 0; i < a.size(); i++)
+    {
+        for (int j = 0; j < a.size()-i-1; j++)
+        {
+            if(a[j]>a[j+1])
+            swap(a[j],a[j+1]);
+        }
+    } 
+}
+```
+
 ## What the Code Does
 
 This program sorts a list of randomly generated numbers using the Bubble Sort algorithm and measures the time taken.
@@ -83,6 +98,21 @@ O(n), where n is the number of coefficients
 
 O(n) due to recursive function calls
 
+## Code
+```
+void hornor(int k, int m, vector<int> &a)
+{
+
+    if(k==m-1)
+    {
+        cout<<a[k];
+        return;
+    }
+    cout<<"(";
+    hornor(k+1,m,a);
+    cout<<"x + "<<a[k]<<")";
+}
+```
 ## What the Code Does
 
 This program prints the polynomial expression using Horner’s method through recursion.
@@ -133,6 +163,20 @@ Worst Case: O(n)
 
 O(n) due to recursive function calls
 
+## Code
+```
+int linearS(vector<int> &a, int target, int j)
+{
+  if (j == a.size())
+    return -1;
+  if (a[j] == target)
+    return j;
+  else
+  {
+    return linearS(a, target, j + 1);
+  }
+}
+```
 ## What the Code Does
 
 This program searches for a key element in a list of randomly generated numbers using recursive Linear Search.
@@ -183,6 +227,33 @@ O(n!), where n is the number of characters
 ## Space Complexity
 
 O(n) due to recursive call stack
+
+## Code 
+```
+void permGen(vector<char> &a,int k,int n)
+{
+    if(k==n) 
+    {
+        for (char c : a)
+            cout << c;
+        cout << endl;
+        return;
+    }
+    else{
+        for(int i=k;i<n;i++)
+        {
+            swap(a[i],a[k]);
+            permGen(a,k+1,n);
+            swap(a[i],a[k]);
+        }
+    }
+} 
+```
+### Use Cases
+- Anagram generation
+- Combinatorial problems
+- Testing all possible arrangements
+
 
 ## What the Code Does
 This program generates and prints all permutations of a string entered by the user.
@@ -238,6 +309,23 @@ Worst Case: O(n²)
 
 O(1) (In-place sorting algorithm)
 
+## Code
+```
+void selectionS(vector<int> &a)
+{
+    for (int i = 0; i < a.size(); i++)
+    {
+        int j=i;
+        for (int k = i+1; k < a.size(); k++)
+        {
+            if(a[k]<a[j])
+            j=k;
+        }
+        swap(a[j],a[i]);
+    }
+}
+```
+
 ## What the Code Does
 This program sorts a list of randomly generated numbers using the Selection Sort algorithm and measures the time taken.
 
@@ -287,6 +375,23 @@ O(2ⁿ), where n is the number of disks
 
 O(n) due to recursive call stack
 
+## Code
+```
+void TOH(int n,int src,int dest, int ext){
+    if(n==1) cout<<"move disk from "<<src<<"->"<<dest<<endl;
+    else{
+        TOH(n-1,src,ext,dest);
+        cout<<"move disc from " <<src<<"-> "<<dest<<endl;
+        TOH(n-1,ext,dest,src);
+    }
+}
+```
+
+### Use Cases
+- Understanding recursion deeply
+- Algorithm design using divide-and-conquer
+- Puzzle solving and state transitions
+
 ## What the Code Does
 This program prints the steps required to solve the Tower of Hanoi problem using recursion.
 The TOH(n, src, dest, ext) function moves n disks from the source peg to the destination peg using an auxiliary peg.
@@ -325,6 +430,21 @@ O(k), where k is the number of recursive reductions required
 
 ## Space Complexity
 O(k) due to recursive call stack
+
+## Code
+```
+int findTips(double v,int tips)
+{
+    if (v >= 1.0)
+    {
+        tips++;
+        v = v - (0.425 * v);
+        return findTips(v,tips);
+    }
+    else
+        return tips;
+}
+```
 
 ## What the Code Does 
 This program calculates how many times a value must be reduced by 42.5% until it becomes less than 1.0.
@@ -366,6 +486,29 @@ Power(x, n)
 ## Space Complexity
 - Optimized recursive method: O(log n)
 - Simple recursive method: O(n)
+
+## Code
+```
+int power(int x, int n)
+{
+    if(n==0) return 1;
+    else return x*power(x,n-1);
+}
+int power1(int x, int n)
+{
+    if(n==0) return 1;
+   int half=power1(x,n/2);
+   if(n %2==0)
+   return half*half;
+   else return 2*half*half;
+}
+```
+
+### Use Cases
+- Fast exponentiation
+- Graphics computations
+- Simulations
+- Modular exponentiation (with modifications)
 
 ## What the Code Does
 This program calculates the power of a number using two different recursive approaches.
@@ -424,6 +567,25 @@ O(n), where n is the size of the array
 ## Space Complexity
 O(1), constant extra space
 
+## Code
+```
+int missingNum(vector<int> &nums)
+{
+    int x=0;
+    int n=nums.size();
+    for (int i = 0; i <= n; i++)
+    {
+        x^=i;
+    }
+    
+    for(int num:nums)
+    {
+        x^=num;
+    }
+    return x;
+}
+```
+
 ## What the Code Does
 This program finds the missing number in a given integer array using XOR.
 
@@ -479,6 +641,28 @@ Worst Case: O(n²) (duplicate found at the end)
 ## Space Complexity
 
 O(1) (no extra memory used)
+
+## Code
+```
+int duplicate(int arr[],int size)
+{
+    int dup = -1;
+    int n = size / 2;
+
+    for (int i = 0; i < n; i++)
+    {
+        int temp = arr[n - 1];
+        for (int j = 0; j < n - i; j++)
+        {
+            if (temp == arr[j])
+            {
+                dup = temp;
+                break;
+            }
+        }
+    }return dup;
+}
+```
 
 ## What the Code Does
 
@@ -546,6 +730,19 @@ Worst Case: O(log n)
 
 O(log n) (due to recursive call stack)
 
+## Code
+```
+int binaryS(vector<int> &a,int st,int end,int target)
+{
+  if(st>end) return -1;
+   int mid=st+(end-st)/2;
+    if(a[mid]==target) return mid;
+    else if(a[mid]<target) return binaryS(a,mid+1,end,target);
+    else if(a[mid]>target)return binaryS(a,st,mid-1,target);
+    else return -1;
+ }
+```
+
 ## What the Code Does
 
 The program generates random numbers and stores them in a vector.
@@ -603,6 +800,24 @@ Worst Case: O(n²) (reverse sorted array)
 
 O(1) (in-place sorting)
 
+## Code 
+```
+void insertionS(vector<int> &a,int n)
+{
+    for(int j=2;j<n;j++)
+    {
+        int key=a[j];
+        int i=j-1;
+        while (i>0 && a[i]>key)
+        {
+            a[i+1]=a[i];
+            i=i-1;
+        }
+        a[i+1]=key;
+    }
+}
+```
+
 ## What the Code Does
 
 The program generates random elements and stores them in a vector.
@@ -659,6 +874,41 @@ MergeSort(A, low, high)
 ### Space Complexity
 - O(n) (requires additional space for merging)
 
+## Code
+```
+void merge(vector<int> &arr, int st, int mid, int end)
+{
+    vector<int> temp;
+    int i = st, j = mid + 1;
+
+    while (i <= mid && j <= end)
+    {
+        if (arr[i] <= arr[j])
+            temp.push_back(arr[i++]);
+        else
+            temp.push_back(arr[j++]);
+    }
+
+    while (i <= mid)
+        temp.push_back(arr[i++]);
+    while (j <= end)
+        temp.push_back(arr[j++]);
+
+    for (int idx = 0; idx < temp.size(); idx++)
+        arr[st + idx] = temp[idx];
+}
+
+void mergeSort(vector<int> &arr, int st, int end)
+{
+    if (st >= end)
+        return;
+
+    int mid = st + (end - st) / 2;
+    mergeSort(arr, st, mid);
+    mergeSort(arr, mid + 1, end);
+    merge(arr, st, mid, end);
+}
+```
 
 ### What the Code Does
 
@@ -727,6 +977,53 @@ QuickSort(A, low, high)
 
 ### Space Complexity
 - O(log n) (due to recursion stack)
+
+---
+
+### Code
+```
+int partitionFunc(vector<int> &arr, int s, int e)
+{
+    int m = s + (e - s) / 2;
+    int index = s;
+
+    for (int i = s; i <= e; i++)
+    {
+        if (arr[i] < arr[m])
+            index++;
+    }
+
+    swap(arr[m], arr[index]);
+
+    int l = s;
+    int h = e;
+
+    while (l < index && h > index)
+    {
+        while (arr[l] < arr[index])
+            l++;
+        while (arr[h] > arr[index])
+            h--;
+        if (l < h)
+        {
+            swap(arr[l], arr[h]);
+            l++;
+            h--;
+        }
+    }
+    return index;
+}
+
+void quickSort(vector<int> &arr, int s, int e)
+{
+    if (s < e)
+    {
+        int j = partitionFunc(arr, s, e);
+        quickSort(arr, s, j - 1);
+        quickSort(arr, j + 1, e);
+    }
+}
+```
 
 ---
 
@@ -800,6 +1097,26 @@ Output: Index of x or -1
 
 ### Space Complexity
 - O(log n) (due to recursion stack)
+
+---
+
+### Code
+```
+int binaryS(vector<int> &a, int s, int e, int target)
+{
+    while (s < e)
+    {
+        int m = s+(e-s)/3;
+
+        if (a[m] == target)
+            return m;
+        else if (a[m] < target)
+            return binaryS(a, m + 1, e, target);
+        else
+            return binaryS(a, s, m - 1, target);
+    }
+}
+```
 
 ---
 
@@ -894,6 +1211,70 @@ Output: Sorted array
 
 ---
 
+### Code
+```
+int partition(vector<int> &a,int s, int e)
+{
+    //int m=s+(e-s)/2;
+    int i=s;
+    int j=e;
+    int pivot = a[s];
+
+    while (i<=j)
+    {
+        while (a[i]<pivot)
+        {
+            i++;
+        }
+        while (a[j]>pivot)
+        {
+            j--;
+        }
+        if(i<=j)
+        {
+            swap(a[i],a[j]);
+            i++;
+            j--;
+        }
+    }
+    //swap(a[s],a[j]);
+    return i;
+    
+}
+void quickSort(vector<int> &a)
+{
+    int n=a.size();
+    stack<int> st;
+
+    st.push(0);
+    st.push(n-1);
+
+    while(!st.empty())
+    {
+        int high=st.top(); 
+        st.pop();
+        int low=st.top();
+        st.pop();
+
+        int p=partition(a,low,high);
+
+        if(p-1>low)
+        {
+            st.push(low);
+            st.push(p-1);
+        }
+
+        if(p<high)
+        {
+            st.push(p);
+            st.push(high);
+        }
+    }
+}
+```
+
+---
+
 ### What the Code Does
 
 - The program generates arrays of different sizes.
@@ -978,6 +1359,59 @@ Output: Convex hull points
 
 ---
 
+### Code
+```
+
+struct Point {
+    int x, y;
+};
+
+int orientation(Point p, Point q, Point r) {
+    return (q.y - p.y) * (r.x - q.x) -
+           (q.x - p.x) * (r.y - q.y);
+}
+
+vector<Point> convexHull(vector<Point>& points) {
+    int n = points.size();
+    if (n <= 1) return points;
+
+    sort(points.begin(), points.end(), [](Point a, Point b) {
+        if (a.x == b.x) return a.y < b.y;
+        return a.x < b.x;
+    });
+
+    vector<Point> lower, upper;
+
+    for (Point p : points) {
+        while (lower.size() >= 2 &&
+               orientation(lower[lower.size()-2],
+                           lower[lower.size()-1], p) >= 0) {
+            lower.pop_back();
+        }
+        lower.push_back(p);
+    }
+
+    for (int i = n - 1; i >= 0; i--) {
+        Point p = points[i];
+        while (upper.size() >= 2 &&
+               orientation(upper[upper.size()-2],
+                           upper[upper.size()-1], p) >= 0) {
+            upper.pop_back();
+        }
+        upper.push_back(p);
+    }
+
+    lower.pop_back();
+    upper.pop_back();
+
+    lower.insert(lower.end(), upper.begin(), upper.end());
+
+    return lower;
+}
+```
+
+---
+
 ### What the Code Does
 
 - The program takes a set of 2D points as input.
@@ -1056,6 +1490,53 @@ Output: Maximum value
 
 ### Space Complexity
 - O(n) (for storing items)
+
+---
+
+### Code
+```
+void bubbleS(vector<pair<float,float>> &a)
+{
+    for (int i = 0; i < a.size(); i++)
+    {
+        for (int j = 0; j < a.size()-i-1; j++)
+        {
+            float r1=a[j].first/a[j].second;
+            float r2=a[j+1].first/a[j+1].second;
+
+            if (r1<r2)
+            {
+                swap(a[j],a[j+1]);
+            }
+            
+        }
+    }
+    
+}
+float knapSack(vector<pair<float,float>> &a,int capacity)
+{
+    bubbleS(a);
+    float totalValue=0;
+    //float r[5];
+    for (int j = 0; j< a.size(); j++)
+    {
+        int value=a[j].first;
+        int weight=a[j].second;
+
+        if(capacity>=weight)
+        {
+            capacity-=weight;
+            totalValue+=value;
+        }
+        else
+        {
+            totalValue+=((float)value/weight)*capacity;
+        }
+    }
+    return totalValue;
+}
+
+```
 
 ---
 
@@ -1139,6 +1620,47 @@ QuickSelect(A, low, high, k)
 
 ### Space Complexity
 - O(1) (in-place algorithm)
+
+---
+
+### Code
+```
+int partition(int a[], int s, int e)
+{
+    int pivot = a[s];
+    int i = s, j = e;
+
+    while(i <= j)
+    {
+        while(a[i] < pivot) i++;
+        while(a[j] > pivot) j--;
+
+        if(i <= j)
+        {
+            swap(a[i], a[j]);
+            i++;
+            j--;
+        }
+    }
+    return i - 1;
+}
+
+int ksmallest(int a[], int s, int e, int k)
+{
+    while(s <= e)
+    {
+        int p = partition(a, s, e);
+
+        if(p == k - 1)
+            return a[p];
+        else if(p < k - 1)
+            s = p + 1;
+        else
+            e = p - 1;
+    }
+    return -1;
+}
+```
 
 ---
 
@@ -1230,6 +1752,43 @@ MaxMin(A, low, high)
 
 ---
 
+### Code
+```
+void maxMin(int a[], int low, int high, int &maxi, int &mini)
+{
+    if(low == high) 
+    {
+        maxi = a[low];
+        mini = a[low];
+    }
+    else if (low == high - 1)
+    {
+        if(a[low] < a[high])
+        {
+            maxi = a[high];
+            mini = a[low];
+        }
+        else{
+            maxi = a[low];
+            mini = a[high];
+        }
+    }
+    else
+    {
+        int mid = low + (high - low) / 2;
+        int max1, min1;
+
+        maxMin(a, low, mid, maxi, mini);
+        maxMin(a, mid + 1, high, max1, min1);
+
+        if(maxi < max1) maxi = max1;
+        if(mini > min1) mini = min1;
+    }
+}
+```
+
+---
+
 ### What the Code Does
 
 - The program generates arrays of different sizes.
@@ -1304,6 +1863,63 @@ Dijkstra(G, n, source)
 ### Space Complexity
 - O(n²) (adjacency matrix)
 - O(n) (distance and visited arrays)
+
+---
+
+### Code
+```
+int minDist(vector<int> &vis, vector<int> &dist, int n)
+{
+    int minIndex = -1;
+    int minValue = INF;
+
+    for (int i = 0; i < n; i++)
+    {
+        //checking ki visited nhi h or dis[i] < minvlaue se
+        if (!vis[i] && dist[i] < minValue)
+        {
+            minValue = dist[i];
+            minIndex = i;
+        }
+    }
+    return minIndex;
+}
+
+void dijkastra(int v, vector<vector<int>> &cost, vector<int> &dist, int n)
+{
+    vector<int> vis(n,0);
+
+   
+    for (int i = 0; i < n; i++)
+    {
+        vis[i] = 0;
+        dist[i] = cost[v][i];
+    }
+
+    dist[v] = 0;
+    vis[v] = 1;
+
+  
+    for (int j = 0; j < n - 1; j++)
+    {
+        int u = minDist(vis, dist, n);
+        if(u == -1) break;
+        vis[u] = true;
+
+        for (int num = 0; num < n; num++)
+        {
+            if (!vis[num] && cost[u][num] != INF)
+            {
+                if (dist[num] > dist[u] + cost[u][num])
+                {
+                    dist[num] = dist[u] + cost[u][num];
+                }
+            }
+        }
+    }
+}
+
+```
 
 ---
 
@@ -1398,6 +2014,43 @@ This implementation uses a **priority queue (min-heap)** to efficiently select t
 
 ---
 
+### Code
+```
+void primAlgo(int V, vector<vector<pair<int,int>> >adj)
+{
+    vector<bool> mstSet(V, false);
+   
+    priority_queue< pair<int,int>,vector<pair<int,int>>, greater<pair<int,int>> >pq;
+    int mstCost=0;
+
+    pq.push({0,0}); 
+
+    while(pq.size()>0)
+    {
+        auto p = pq.top();
+        int wt=p.first;
+        int u=p.second;
+        pq.pop();
+
+        if(!mstSet[u]){
+            mstSet[u]=true;
+            mstCost+=wt;
+
+            for(int i=0; i<adj[u].size();i++){
+                int v = adj[u][i].first;
+                int w = adj[u][i].second;
+
+                if(!mstSet[v])
+                pq.push({w,v});
+            }
+        }
+    }
+    
+}
+```
+
+---
+
 ### What the Code Does
 
 - The program generates graphs of different sizes using adjacency lists.
@@ -1445,7 +2098,7 @@ Steps involved:
 
 ---
 ### Graph 
-![Graph Description](lab6\Kruskal.png)
+![Graph of Kruskal](lab6\Kruskal.png)
 
 ---
 
@@ -1474,6 +2127,73 @@ Steps involved:
 
 ### Space Complexity
 - O(V + E)
+
+---
+
+### Code
+```
+struct edge
+{
+    int u, v, weight;
+
+    bool operator>(const edge &second) const
+    {
+        return weight > second.weight;
+    }
+};
+
+bool isCycle(int curr, int end, vector<bool> &visit, const vector<vector<int>> &adj)
+{
+    if (curr == end)
+    {
+        return true;
+    }
+
+    visit[curr] = true;
+
+    for (int neighbour : adj[curr])
+    {
+        if (!visit[neighbour])
+        {
+            if (isCycle(neighbour, end, visit, adj))
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+void kruskal(int v, const vector<edge> &edges)
+{
+    priority_queue<edge, vector<edge>, greater<edge>> minHeap;
+
+    for (auto e : edges)
+    {
+        minHeap.push(e);
+    }
+    vector<vector<int>> adj(v);
+    vector<edge> mst;
+    int minCost = 0;
+
+    while (!minHeap.empty() && mst.size() < v - 1)
+    {
+        edge currEdge = minHeap.top();
+        minHeap.pop();
+
+        vector<bool> visit(v, false);
+
+        if (!isCycle(currEdge.u, currEdge.v, visit, adj))
+        {
+            mst.push_back(currEdge);
+            minCost += currEdge.weight;
+
+            adj[currEdge.u].push_back(currEdge.v);
+            adj[currEdge.v].push_back(currEdge.u);
+        }
+    }
+}
+```
 
 ---
 
@@ -1569,6 +2289,61 @@ Steps involved:
 
 ---
 
+### Code
+```
+void printParenthesis(int i,int j,int s[10][10])
+{
+    if (i==j)
+    {
+        cout<<"A"<<i;
+    }
+    else
+    {
+        cout<<"(";
+        printParenthesis(i,s[i][j],s);
+        printParenthesis(s[i][j]+1,j,s);
+        cout<<")";
+    }
+    
+}
+void MCM(int n, int p[])
+{
+    int m[10][10];
+    int s[10][10];
+    int i,j;
+
+    for (int i = 0; i < n; i++)
+    {
+        m[i][i]=0;
+    }
+    
+    for (int l = 2; l < n; l++)
+    {
+        for ( i = 1; i < n - l + 1; i++)
+        {
+             j = i + l - 1;
+            m[i][j] = INF;
+            for (int k = i; k < j; k++)
+            {
+                int q = m[i][k] + m[k + 1][j] + p[i - 1] * p[k] * p[j];
+                if (q < m[i][j])
+                {
+                    m[i][j] = q;
+                    s[i][j] = k;
+                }
+            }
+        }
+    }
+    cout<<"Minimum number of multiplications: "<<m[1][n-1];   
+
+    cout<<"\nparenthesis: ";
+    printParenthesis(1,n-1,s);
+    cout<<endl;
+}
+```
+
+---
+
 ### What the Code Does
 
 - The program defines an array `p[]` representing matrix dimensions
@@ -1646,6 +2421,84 @@ Both approaches use **Dynamic Programming** to store intermediate results and av
 
 ---
 
+### Code
+```
+int findStages(int c[][MAX], int n)
+{
+    int stage[MAX];
+
+    stage[n] = 1;
+
+    for (int i = n - 1; i >= 1; i--)
+    {
+        int maxStage = 0;
+
+        for (int j = i + 1; j <= n; j++)
+        {
+            if (c[i][j] != 0)
+            {
+                if (stage[j] > maxStage)
+                    maxStage = stage[j];
+            }
+        }
+
+        stage[i] = maxStage + 1;
+    }
+
+    return stage[1];
+}
+void forwardGraph(int c[][10], int n, int k)
+{
+    int cost[10], d[10];
+
+    cost[n] = 0;
+
+    for (int j = n - 1; j >= 1; j--)
+    {
+        cost[j] = INT_MAX;
+
+        for (int r = j + 1; r <= n; r++)
+        {
+            if (c[j][r] != 0)
+            {
+                if (cost[r]!= INT_MAX && c[j][r] + cost[r] < cost[j])
+                {
+                    cost[j] = c[j][r] + cost[r];
+                    d[j] = r;
+                }
+            }
+        }
+    }
+    cout << "Minimum Cost: " << cost[1] << endl;
+}
+
+void backwardGraph(int c[][10], int n, int k)
+{
+    int cost[10], d[10];
+
+    cost[1] = 0;
+    for (int j = 2; j <= n; j++)
+    {
+        cost[j] = INT_MAX;
+
+        for (int r = 1; r < j; r++)
+        {
+            if ( c[r][j] != 0)
+            {
+                if (cost[r]!= INT_MAX && c[r][j] + cost[r] < cost[j])
+                {
+                    cost[j] = c[r][j] + cost[r];
+                    d[j] = r;
+                }
+            }
+        }
+    }
+    cout << "Minimum Cost for Bgraph: " << cost[n] << endl;
+}
+```
+
+---
+
 ### What the Code Does
 
 - The program takes the number of vertices as input.
@@ -1718,6 +2571,23 @@ Steps involved:
 
 ### Space Complexity
 - O(n²) for distance matrix
+
+---
+
+### Code
+```
+void allpairShort(vector<vector<int>>& dist, int n) {
+    for (int k = 0; k < n; k++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (dist[i][k] < INF && dist[k][j] < INF) {
+                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+                }
+            }
+        }
+    }
+}
+```
 
 ---
 
@@ -1804,6 +2674,70 @@ The algorithm builds a table that stores lengths of LCS for substrings and then 
 
 ---
 
+### Code
+```
+void LCS(string X, string Y)
+{
+    int m = X.size();
+    int n = Y.size();
+
+    c.resize(m + 1, vector<int>(n + 1));
+    p.resize(m + 1, vector<char>(n + 1));
+    c[0][0]=0;
+
+    for (int i = 1; i <= m; i++)
+    {
+        c[i][0] = 0;
+    }
+    for (int j = 1; j <= n; j++)
+    {
+        c[0][j] = 0;
+    }
+    for (int i = 1; i <= m; i++)
+    {
+        for (int j = 1; j <= n; j++)
+        {
+            if (X[i-1] == Y[j-1])
+            {
+                c[i][j] = 1 + c[i - 1][j - 1];
+                p[i][j] = 'D';
+            }
+            else if (c[i - 1][j] >= c[i][j - 1])
+            {
+                c[i][j] = max(c[i - 1][j], c[i][j - 1]);
+                p[i][j]='U';
+            }
+            else{
+                c[i][j]=c[i][j-1];
+                p[i][j]='L';
+            }
+        }
+    }
+}
+void write(string X, int i, int j)
+{
+     if (i == 0 || j == 0)
+        return;
+
+    if (p[i][j] == 'D')
+    {
+        write(X, i - 1, j - 1);
+        cout << X[i - 1] << " ";
+    }
+    else if (p[i][j] == 'U')
+    {
+        write(X, i - 1, j);
+    }
+    else
+    {
+        write(X, i, j - 1);
+    }  
+}
+
+```
+
+---
+
 ### What the Code Does
 
 - The program takes two input strings.
@@ -1882,6 +2816,48 @@ Dynamic Programming is used to:
 
 ### Space Complexity
 - O(n × W) for DP table
+
+---
+
+### Code
+```
+int knapsack(int W, vector<int>& wt, vector<int>& val, int n)
+{
+    vector<vector<int>> dp(n + 1, vector<int>(W + 1, 0));
+
+    for (int i = 1; i <= n; i++)
+    {
+        for (int w = 1; w <= W; w++)
+        {
+            if (wt[i - 1] <= w)
+            {
+                dp[i][w] = max(
+                    val[i - 1] + dp[i - 1][w - wt[i - 1]],
+                    dp[i - 1][w]
+                );
+            }
+            else
+            {
+                dp[i][w] = dp[i - 1][w];
+            }
+        }
+    }
+
+    return dp[n][W];
+}
+
+void generateItems(int n, vector<int>& wt, vector<int>& val)
+{
+    wt.clear();
+    val.clear();
+
+    for (int i = 0; i < n; i++)
+    {
+        wt.push_back(rand() % 50 + 1);
+        val.push_back(rand() % 100 + 1);
+    }
+}
+```
 
 ---
 
@@ -1973,6 +2949,35 @@ The Travelling Salesman Problem (TSP) is a classic optimization problem where:
 
 ---
 
+### Code
+```
+int tsp_dp(int n, vector<vector<int>>& cost) {
+    int VISITED_ALL = 1 << n;
+    vector<vector<int>> dp(VISITED_ALL, vector<int>(n, INT_MAX));
+
+    dp[1][0] = 0;
+
+    for (int i = 1; i < VISITED_ALL; i++) {
+        for (int j = 0; j < n; j++) {
+            if ((i & (1 << j)) == 0) continue;
+            for (int k = 0; k < n; k++) {
+                if ((i & (1 << k)) != 0) continue;
+                int newMask = i | (1 << k);
+                dp[newMask][k] = min(dp[newMask][k], dp[i][j] + cost[j][k]);
+            }
+        }
+    }
+
+    int ans = INT_MAX;
+    for (int i = 0; i < n; i++) {
+        ans = min(ans, dp[VISITED_ALL - 1][i] + cost[i][0]);
+    }
+    return ans;
+}
+```
+
+---
+
 ## What the Code Does
 
 - Defines a cost matrix representing distances between cities  
@@ -2050,6 +3055,44 @@ Backtracking is used to solve this problem:
 ### Space Complexity
 - O(n) (for storing positions of queens)
 - O(n) (recursion stack)
+
+---
+
+### Code
+```
+bool place(int k, int i, vector<int> &x)
+{
+    for (int j = 0; j < k; j++)
+    {
+        if (x[j] == i || abs(x[j] - i) == abs(j - k))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+void NQueen(int k, int n, vector<int> &x)
+{
+    for (int i = 0; i < n; i++)
+    {
+        if (place(k, i, x))
+        {
+            x[k] = i;
+            if (k == n - 1)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    cout << x[j] << " ";
+                }
+                cout << endl;
+            }
+            else
+                NQueen(k + 1, n, x);
+        }
+    }
+}
+```
 
 ---
 
@@ -2135,6 +3178,38 @@ Bounding conditions are used to improve efficiency:
 ### Space Complexity
 - O(n) (solution vector)
 - O(n) (recursion stack)
+
+---
+
+### Code
+```
+void sumofSubset(int s, int k, int r)
+{
+    x[k] = 1;
+
+    if (s + w[k] == m)
+    {
+        for (int i = 0; i <= k; i++)
+        {
+            if (x[i] == 1)
+            {
+                cout << w[i] << " ";
+            }
+        }
+        cout << endl;
+    }
+    else if (k + 1 < n && s + w[k] + w[k + 1] <= m)
+    {
+        sumofSubset(s + w[k], k + 1, r - w[k]);
+    }
+
+    if (k+1<n && s + r - w[k] >= m && s + w[k] <= m)
+    {
+        x[k] = 0;
+        sumofSubset(s, k + 1, r - w[k]);
+    }
+}
+```
 
 ---
 
@@ -2224,6 +3299,58 @@ This problem is solved using **Backtracking**:
 ## Space Complexity
 - O(n) (color array)  
 - O(n) (recursion stack)  
+
+---
+
+### Code
+```
+void NextValue(int k)
+{
+    do
+    {
+        x[k] = (x[k] + 1) % (m + 1);
+        if (x[k] == 0)
+        {
+            return;
+        }
+        int j;
+        for (j = 1; j <= n; j++)
+        {
+            if (adj[k][j] == 1 && x[k] == x[j])
+            {
+                break;
+            }
+        }
+        if (j == n+1)
+            return;
+
+    } while (1);
+}
+
+void mColoring(int k)
+{
+    do
+    {
+        NextValue(k);
+
+        if (x[k] == 0)
+        {
+            return;
+        }
+        if (k == n)
+        {
+            for (int i = 1; i <= n; i++)
+            {
+                cout << x[i] << " ";
+            }
+            cout << endl;
+        }
+        else
+            mColoring(k + 1);
+
+    } while (1);
+}
+```
 
 ---
 
@@ -2319,6 +3446,67 @@ If constraints fail → backtrack
 ## Space Complexity
 - O(n) (solution array)  
 - O(n) (recursion stack)  
+
+---
+
+### Code
+```
+void NextValue(int k)
+{
+    do
+    {
+        x[k] = (x[k] + 1) % (n + 1);
+        if (x[k] == 0)
+        {
+            return;
+        }
+        if (adj[x[k - 1]][x[k]] != 0)
+        {
+            int j;
+            for (j = 1; j <= k-1; j++)
+            {
+                if (x[j] == x[k])
+                {
+                    break;
+                }
+            }
+            if (j == k)
+            {
+                if (k < n || (k == n && adj[x[n]][x[1]] != 0))
+                {
+                    return;
+                }
+            }
+        }
+
+    } while (1);
+}
+
+void Hamiltonian(int k)
+{
+    do
+    {
+        NextValue(k);
+
+        if (x[k] == 0)
+        {
+            return;
+        }
+        if (k == n)
+        {
+            for (int i = 1; i <= n; i++)
+            {
+                cout << x[i] << " ";
+            }
+            cout<<x[1];
+            cout << endl;
+        }
+        else
+            Hamiltonian(k + 1);
+
+    } while (1);
+}
+```
 
 ---
 
